@@ -1,0 +1,307 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:40px;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.top-bar{
+    margin-bottom:40px;
+}
+
+.top-bar h1{
+    color:cyan;
+    font-size:42px;
+}
+
+/* =========================
+   ADMIN CARD
+========================= */
+
+.admin-card{
+    background:#111827;
+    padding:35px;
+    border-radius:24px;
+    margin-bottom:60px;
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.admin-card h2{
+    color:cyan;
+    margin-bottom:25px;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+input,
+textarea{
+    width:100%;
+    padding:16px;
+    margin-top:18px;
+    border:none;
+    border-radius:14px;
+    background:#1e293b;
+    color:white;
+    font-size:15px;
+}
+
+textarea{
+    height:140px;
+    resize:none;
+}
+
+/* =========================
+   LABELS
+========================= */
+
+.upload-label{
+    display:block;
+    margin-top:25px;
+    margin-bottom:10px;
+    color:#cbd5e1;
+    font-size:15px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+button{
+    margin-top:22px;
+    padding:14px 22px;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:translateY(-3px);
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title{
+    margin-bottom:35px;
+    color:cyan;
+    font-size:36px;
+}
+
+/* =========================
+   PROJECT GRID
+========================= */
+
+.projects-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:35px;
+}
+
+/* =========================
+   PROJECT CARD
+========================= */
+
+.project-card{
+    background:#111827;
+    border-radius:24px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.08);
+    transition:0.4s;
+    cursor:pointer;
+}
+
+.project-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 25px rgba(0,255,255,0.12);
+}
+
+.project-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+/* =========================
+   PROJECT CONTENT
+========================= */
+
+.project-content{
+    padding:28px;
+    max-height:320px;
+    overflow-y:auto;
+}
+
+.project-content h3{
+    color:cyan;
+    margin-bottom:14px;
+    font-size:26px;
+}
+
+.project-content p{
+    color:#d1d5db;
+    line-height:1.8;
+    margin-bottom:14px;
+}
+
+.project-content span{
+    color:#67e8f9;
+}
+
+/* =========================
+   BUTTON GROUP
+========================= */
+
+.buttons{
+    margin-top:22px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.edit-btn{
+    background:#22c55e;
+    color:white;
+}
+
+.media-btn{
+    background:#3b82f6;
+    color:white;
+}
+
+.delete-btn{
+    background:#ef4444;
+    color:white;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.8);
+    justify-content:center;
+    align-items:center;
+    z-index:2000;
+}
+
+.modal-content{
+    background:#111827;
+    padding:35px;
+    width:90%;
+    max-width:650px;
+    border-radius:24px;
+    position:relative;
+    max-height:90vh;
+    overflow-y:auto;
+}
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+
+.close-btn{
+    position:absolute;
+    right:25px;
+    top:18px;
+    font-size:34px;
+    cursor:pointer;
+    color:white;
+}
+
+/* =========================
+   SAVE BUTTON
+========================= */
+
+.save-btn{
+    background:cyan;
+    color:black;
+}
+
+/* =========================
+   POPUP IMAGE
+========================= */
+
+.popup-image{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    border-radius:18px;
+    margin-bottom:25px;
+}
+
+/* =========================
+   POPUP CONTENT
+========================= */
+
+#popupTitle{
+    color:cyan;
+    margin-bottom:20px;
+    font-size:34px;
+}
+
+#popupDescription{
+    line-height:2;
+    color:#d1d5db;
+    margin-bottom:20px;
+}
+
+#popupTech{
+    color:#67e8f9;
+    font-size:18px;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+.project-content::-webkit-scrollbar,
+.modal-content::-webkit-scrollbar{
+    width:8px;
+}
+
+.project-content::-webkit-scrollbar-thumb,
+.modal-content::-webkit-scrollbar-thumb{
+    background:cyan;
+    border-radius:20px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    body{
+        padding:20px;
+    }
+
+    .top-bar h1{
+        font-size:32px;
+    }
+
+    .section-title{
+        font-size:28px;
+    }
+
+}

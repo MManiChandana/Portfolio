@@ -1,0 +1,86 @@
+{
+  "name": "M Mani Chandana",
+  "role": "Data Analyst | Data Scientist",
+  "about": "Aspiring Data Analyst and Data Scientist passionate about transforming raw data into meaningful business insights using Python, SQL, Power BI, Statistics, and Machine Learning.",
+  "skills": [
+    {
+      "name": "Python",
+      "description": "Python is used for data analysis, automation, machine learning, and backend development."
+    },
+    {
+      "name": "SQL",
+      "description": "SQL is used for querying, managing, and analyzing structured data stored in relational databases."
+    },
+    {
+      "name": "Power BI",
+      "description": "Power BI helps create interactive dashboards and business reports."
+    },
+    {
+      "name": "Machine Learning",
+      "description": "Machine Learning enables predictive analytics by learning patterns from data."
+    }
+  ],
+  "notes": [
+    {
+      "title": "SQL Interview Preparation",
+      "content": "Important joins, window functions, CTEs, and optimization concepts."
+    },
+    {
+      "title": "Machine Learning Notes",
+      "content": "Regression, classification, feature engineering, model evaluation."
+    },
+    {
+      "title": "Ml",
+      "content": "ML"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Retail Sales Dashboard",
+      "description": "Interactive analytics dashboard for sales KPIs and business insights.",
+      "tech": "SQL • Power BI • Analytics",
+      "details": "This project focuses on analyzing retail sales KPIs, customer purchasing behavior, revenue growth trends, and regional performance using Power BI dashboards and SQL queries.",
+      "features": [
+        "Interactive Dashboard",
+        "Regional Analysis",
+        "KPI Tracking",
+        "Revenue Insights"
+      ],
+      "image": "/static/uploads/f221e5216dec45c1b87d2ecf2555410e.png",
+      "media": [
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
+        },
+        {
+          "type": "image",
+          "url": "/static/uploads/f221e5216dec45c1b87d2ecf2555410e.png"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Netflix Data Analysis",
+      "description": "EDA using Python, Pandas and visualization libraries.",
+      "tech": "Python • Pandas • Visualization",
+      "details": "Performed complete Exploratory Data Analysis on Netflix datasets using Python libraries and attractive visualizations.",
+      "features": [
+        "EDA",
+        "Data Cleaning",
+        "Visualizations",
+        "Trend Analysis"
+      ],
+      "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
+      "media": [
+        {
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
+        }
+      ]
+    }
+  ],
+  "github": "https://github.com/MManiChandana",
+  "linkedin": "https://www.linkedin.com/in/mchandana10032003/",
+  "email": "mchandana10m2003@gmail.com"
+}

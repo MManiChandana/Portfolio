@@ -1,0 +1,65 @@
+{
+  "profile": {
+    "name": "M Mani Chandana",
+    "role": "Data Analyst | Data Scientist",
+    "about": "Aspiring Data Analyst and Data Scientist passionate about transforming raw data into meaningful business insights using Python, SQL, Power BI, Statistics, and Machine Learning.",
+    "hero_lines": "I build clean dashboards, practical analytics workflows, and machine learning experiments that turn raw data into decisions.",
+    "resume": "#",
+    "linkedin": "https://www.linkedin.com/in/mchandana10032003/",
+    "github": "https://github.com/MManiChandana",
+    "email": "mchandana10m2003@gmail.com",
+    "hero_image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1800&q=80",
+    "profile_image": "/static/uploads/54591a32db994f1598d9098388f575b8_ChatGPT_Image_Feb_16_2026_06_47_04_PM.png"
+  },
+  "skills": [
+    {
+      "name": "Python",
+      "desc": "Python is my main language for data cleaning, automation, analysis, machine learning experiments, and backend logic.",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+    },
+    {
+      "name": "SQL",
+      "desc": "SQL helps me query, model, and analyze structured data with joins, aggregations, CTEs, and window functions.",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+    },
+    {
+      "name": "Power BI",
+      "desc": "Power BI lets me design interactive reports, KPI dashboards, and visual stories for business decisions.",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azuresqldatabase/azuresqldatabase-original.svg"
+    },
+    {
+      "name": "Machine Learning",
+      "desc": "I use machine learning to explore patterns, train predictive models, evaluate results, and improve decisions.",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Retail Sales Dashboard",
+      "description": "Interactive analytics dashboard for sales KPIs, customer trends, and revenue insights.",
+      "details": "This project analyzes retail sales performance across regions, categories, and time periods using clean KPI views and business-focused dashboards.",
+      "tech": "SQL - Power BI - Analytics",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+      "live_link": "#",
+      "repo_link": "#"
+    },
+    {
+      "title": "Netflix Data Analysis",
+      "description": "Exploratory data analysis using Python, Pandas, and visualization libraries.",
+      "details": "A complete EDA project focused on cleaning the Netflix dataset, finding trends, and presenting insights through useful visualizations.",
+      "tech": "Python - Pandas - Visualization",
+      "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
+      "live_link": "#",
+      "repo_link": "#"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Data Analytics Certification",
+      "issuer": "Add Issuer",
+      "date": "2026",
+      "link": "#"
+    }
+  ],
+  "messages": []
+}
