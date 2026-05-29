@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main class="admin-login-shell">
+    <form class="admin-login-card" method="POST">
+        <p class="eyebrow">Private Editor</p>
+        <h1>Admin Access</h1>
+        <label>Email<input name="email" type="email" placeholder="Enter owner email" required autofocus></label>
+        <label>Password<input name="password" type="password" placeholder="Enter password" required></label>
+        {% if error %}
+        <p class="form-error">{{ error }}</p>
+        {% endif %}
+        {% if notice %}
+        <p class="form-notice">{{ notice }}</p>
+        {% endif %}
+        <button class="button primary" type="submit">Continue</button>
+        <a class="button ghost" href="{{ url_for('home') }}">Back to Portfolio</a>
+    </form>
+
+    <form class="admin-login-card reset-card" method="POST" action="{{ url_for('request_password_reset') }}">
+        <h2>Reset Password</h2>
+        <label>Owner email<input name="email" type="email" placeholder="mchandana10m2003@gmail.com" required></label>
+        <button class="button ghost" type="submit">Send Reset Link</button>
+    </form>
+</main>
+{% endblock %}

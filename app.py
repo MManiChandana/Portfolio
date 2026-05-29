@@ -1,14 +1,20 @@
 import json
+import os
+import secrets
+import smtplib
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
+from email.message import EmailMessage
 from pathlib import Path
 from urllib.parse import quote
 
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, session, url_for
+from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 
 ROOT = Path(__file__).parent
 DATA_FILE = ROOT / "data" / "db.json"
@@ -16,6 +22,8 @@ UPLOAD_DIR = ROOT / "static" / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 ALLOWED_UPLOADS = {"png", "jpg", "jpeg", "gif", "webp", "pdf", "mp4", "mov", "webm"}
+ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "mchandana10m2003@gmail.com").lower()
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "Manu@1428")
 
 
 DEFAULT_DATA = {
@@ -82,6 +90,7 @@ DEFAULT_DATA = {
         }
     ],
     "messages": [],
+    "settings": {},
 }
 
 
@@ -109,6 +118,7 @@ def normalize_data(data):
 
     data.setdefault("certifications", [])
     data.setdefault("messages", [])
+    data.setdefault("settings", {})
     return data
 
 
@@ -146,13 +156,172 @@ def update_from_form(target, fields):
         target[field] = request.form.get(field, "").strip()
 
 
+def verify_admin_password(data, password):
+    password_hash = data.get("settings", {}).get("admin_password_hash")
+    if password_hash:
+        return check_password_hash(password_hash, password)
+    return password == ADMIN_PASSWORD
+
+
+def set_admin_password(data, password):
+    data.setdefault("settings", {})["admin_password_hash"] = generate_password_hash(password)
+    data["settings"].pop("reset_token", None)
+    data["settings"].pop("reset_expires", None)
+
+
+def create_reset_token(data):
+    token = secrets.token_urlsafe(32)
+    data.setdefault("settings", {})["reset_token"] = token
+    data["settings"]["reset_expires"] = (datetime.utcnow() + timedelta(minutes=30)).isoformat()
+    return token
+
+
+def reset_token_is_valid(data, token):
+    settings = data.get("settings", {})
+    expires = settings.get("reset_expires", "")
+    if not token or token != settings.get("reset_token"):
+        return False
+
+    try:
+        return datetime.utcnow() <= datetime.fromisoformat(expires)
+    except ValueError:
+        return False
+
+
+def send_password_reset_email(reset_link):
+    mail_server = os.environ.get("MAIL_SERVER")
+    mail_username = os.environ.get("MAIL_USERNAME")
+    mail_password = os.environ.get("MAIL_PASSWORD")
+    if not mail_server or not mail_username or not mail_password:
+        return False
+
+    message = EmailMessage()
+    message["Subject"] = "Portfolio admin password reset"
+    message["From"] = os.environ.get("MAIL_FROM", mail_username)
+    message["To"] = ADMIN_EMAIL
+    message.set_content(
+        "Use this link to reset your portfolio admin password. "
+        "The link expires in 30 minutes.\n\n"
+        f"{reset_link}"
+    )
+
+    mail_port = int(os.environ.get("MAIL_PORT", "587"))
+    use_tls = os.environ.get("MAIL_USE_TLS", "true").lower() != "false"
+
+    with smtplib.SMTP(mail_server, mail_port) as smtp:
+        if use_tls:
+            smtp.starttls()
+        smtp.login(mail_username, mail_password)
+        smtp.send_message(message)
+
+    return True
+
+
 @app.route("/")
 def home():
     return render_template("index.html", data=load_data())
 
 
+@app.route("/admin-login", methods=["GET", "POST"])
+def admin_login():
+    data = load_data()
+    error = ""
+
+    if request.method == "POST":
+        email = request.form.get("email", "").strip().lower()
+        password = request.form.get("password", "")
+        if email == ADMIN_EMAIL and verify_admin_password(data, password):
+            session["admin_email"] = email
+            return redirect(url_for("admin"))
+        error = "Enter the owner email and password to continue."
+
+    return render_template("admin_login.html", data=data, error=error)
+
+
+@app.route("/request-password-reset", methods=["POST"])
+def request_password_reset():
+    data = load_data()
+    notice = "If this is the owner email, a reset link will be sent."
+    email = request.form.get("email", "").strip().lower()
+
+    if email == ADMIN_EMAIL:
+        token = create_reset_token(data)
+        save_data(data)
+        reset_link = url_for("reset_password", token=token, _external=True)
+        try:
+            if not send_password_reset_email(reset_link):
+                notice = "Email is not configured yet. Add SMTP settings in Render to receive reset links."
+        except OSError:
+            notice = "Email could not be sent. Please check SMTP settings in Render."
+        except smtplib.SMTPException:
+            notice = "Email could not be sent. Please check SMTP username and app password."
+
+    return render_template("admin_login.html", data=data, notice=notice, error="")
+
+
+@app.route("/reset-password/<token>", methods=["GET", "POST"])
+def reset_password(token):
+    data = load_data()
+    if not reset_token_is_valid(data, token):
+        return render_template("reset_password.html", data=data, token="", error="This reset link is invalid or expired.", notice="")
+
+    error = ""
+    notice = ""
+    if request.method == "POST":
+        password = request.form.get("password", "")
+        confirm_password = request.form.get("confirm_password", "")
+        if len(password) < 8:
+            error = "Password must be at least 8 characters."
+        elif password != confirm_password:
+            error = "Passwords do not match."
+        else:
+            set_admin_password(data, password)
+            save_data(data)
+            session["admin_email"] = ADMIN_EMAIL
+            return redirect(url_for("admin"))
+
+    return render_template("reset_password.html", data=data, token=token, error=error, notice=notice)
+
+
+@app.route("/admin-logout")
+def admin_logout():
+    session.pop("admin_email", None)
+    return redirect(url_for("home"))
+
+
+@app.route("/admin-change-password", methods=["GET", "POST"])
+def admin_change_password():
+    if session.get("admin_email") != ADMIN_EMAIL:
+        return redirect(url_for("admin_login"))
+
+    data = load_data()
+    error = ""
+    notice = ""
+
+    if request.method == "POST":
+        current_password = request.form.get("current_password", "")
+        password = request.form.get("password", "")
+        confirm_password = request.form.get("confirm_password", "")
+
+        if not verify_admin_password(data, current_password):
+            error = "Current password is incorrect."
+        elif len(password) < 8:
+            error = "Password must be at least 8 characters."
+        elif password != confirm_password:
+            error = "Passwords do not match."
+        else:
+            set_admin_password(data, password)
+            save_data(data)
+            notice = "Password updated successfully."
+
+    return render_template("change_password.html", data=data, error=error, notice=notice)
+
+
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
+    if session.get("admin_email") != ADMIN_EMAIL:
+        return redirect(url_for("admin_login"))
+
     data = load_data()
 
     if request.method == "POST":
@@ -224,6 +393,9 @@ def admin():
 
 @app.route("/delete/<section>/<int:index>", methods=["POST"])
 def delete_item(section, index):
+    if session.get("admin_email") != ADMIN_EMAIL:
+        return redirect(url_for("admin_login"))
+
     data = load_data()
     if section in {"skills", "projects", "certifications", "messages"} and 0 <= index < len(data.get(section, [])):
         data[section].pop(index)
