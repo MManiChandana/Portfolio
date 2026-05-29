@@ -44,13 +44,13 @@
       "repo_link": "#"
     },
     {
-      "title": "Netflix Data Analysis",
+      "title": "Customer Segment Analysis",
       "description": "Exploratory data analysis using Python, Pandas, and visualization libraries.",
       "details": "A complete EDA project focused on cleaning the Netflix dataset, finding trends, and presenting insights through useful visualizations.",
       "tech": "Python - Pandas - Visualization",
-      "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
-      "live_link": "#",
-      "repo_link": "#"
+      "image": "/static/uploads/d7907a98884a47f09479b02f01bb62fa_Screenshot_2026-05-29_234532.png",
+      "live_link": "https://customer-segment-analysis.streamlit.app/",
+      "repo_link": "https://github.com/MManiChandana/Customer-segment-Analysis/tree/main"
     }
   ],
   "certifications": [
