@@ -38,6 +38,8 @@ DEFAULT_DATA = {
         "email": "mchandana10m2003@gmail.com",
         "hero_image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1800&q=80",
         "profile_image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
+        "profile_video": "",
+        "profile_audio": "",
     },
     "skills": [
         {
@@ -87,6 +89,7 @@ DEFAULT_DATA = {
             "issuer": "Add Issuer",
             "date": "2026",
             "link": "#",
+            "image": "",
         }
     ],
     "messages": [],
@@ -135,6 +138,8 @@ def save_data(data):
     DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
     with DATA_FILE.open("w", encoding="utf-8") as file:
         json.dump(data, file, indent=2, ensure_ascii=False)
+        file.flush()
+        os.fsync(file.fileno())
 
 
 def uploaded_url(field_name):
@@ -330,9 +335,9 @@ def admin():
         if action == "profile":
             update_from_form(
                 data["profile"],
-                ["name", "role", "about", "hero_lines", "resume", "hero_image", "profile_image", "linkedin", "github", "email"],
+                ["name", "role", "about", "hero_lines", "resume", "hero_image", "profile_image", "profile_video", "profile_audio", "linkedin", "github", "email"],
             )
-            for field in ("resume_file", "hero_image_file", "profile_image_file"):
+            for field in ("resume_file", "hero_image_file", "profile_image_file", "profile_video_file", "profile_audio_file"):
                 uploaded = uploaded_url(field)
                 if uploaded:
                     data["profile"][field.replace("_file", "")] = uploaded
@@ -372,18 +377,23 @@ def admin():
                 data["projects"][index]["image"] = uploaded
 
         elif action == "add_certification":
+            image = uploaded_url("image_file") or request.form.get("image", "").strip()
             data["certifications"].append(
                 {
                     "title": request.form.get("title", "").strip(),
                     "issuer": request.form.get("issuer", "").strip(),
                     "date": request.form.get("date", "").strip(),
                     "link": request.form.get("link", "").strip(),
+                    "image": image,
                 }
             )
 
         elif action == "update_certification":
             index = int(request.form.get("index", 0))
-            update_from_form(data["certifications"][index], ["title", "issuer", "date", "link"])
+            update_from_form(data["certifications"][index], ["title", "issuer", "date", "link", "image"])
+            uploaded = uploaded_url("image_file")
+            if uploaded:
+                data["certifications"][index]["image"] = uploaded
 
         save_data(data)
         return redirect(url_for("admin"))

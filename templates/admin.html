@@ -29,6 +29,10 @@
             <label>Upload hero image<input type="file" name="hero_image_file" accept="image/*"></label>
             <label>Profile image link<input name="profile_image" value="{{ data.profile.profile_image }}"></label>
             <label>Upload profile image<input type="file" name="profile_image_file" accept="image/*"></label>
+            <label>Profile video link<input name="profile_video" value="{{ data.profile.profile_video }}" placeholder="Video URL or upload below"></label>
+            <label>Upload profile video<input type="file" name="profile_video_file" accept="video/*"></label>
+            <label>Profile audio link<input name="profile_audio" value="{{ data.profile.profile_audio }}" placeholder="Audio URL or upload below"></label>
+            <label>Upload profile audio<input type="file" name="profile_audio_file" accept="audio/*"></label>
             <label>Email<input name="email" value="{{ data.profile.email }}"></label>
             <label>LinkedIn<input name="linkedin" value="{{ data.profile.linkedin }}"></label>
             <label>GitHub<input name="github" value="{{ data.profile.github }}"></label>
@@ -108,12 +112,14 @@
     </section>
 
     <section class="admin-section two-col">
-        <form class="admin-card" method="POST">
+        <form class="admin-card" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="action" value="add_certification">
             <h2>Add Certification</h2>
             <label>Title<input name="title" required></label>
             <label>Issuer<input name="issuer" required></label>
             <label>Date<input name="date"></label>
+            <label>Certificate image link<input name="image" placeholder="https://..."></label>
+            <label>Upload certificate image<input type="file" name="image_file" accept="image/*"></label>
             <label>Certificate link<input name="link"></label>
             <button class="button primary" type="submit">Add Certification</button>
         </form>
@@ -136,12 +142,17 @@
         <h2>Existing Certifications</h2>
         <div class="editor-grid">
             {% for cert in data.certifications %}
-            <form class="admin-card compact" method="POST">
+            <form class="admin-card compact" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="update_certification">
                 <input type="hidden" name="index" value="{{ loop.index0 }}">
+                {% if cert.image %}
+                <img class="admin-preview" src="{{ cert.image }}" alt="{{ cert.title }}">
+                {% endif %}
                 <label>Title<input name="title" value="{{ cert.title }}"></label>
                 <label>Issuer<input name="issuer" value="{{ cert.issuer }}"></label>
                 <label>Date<input name="date" value="{{ cert.date }}"></label>
+                <label>Image link<input name="image" value="{{ cert.image }}"></label>
+                <label>Upload image<input type="file" name="image_file" accept="image/*"></label>
                 <label>Link<input name="link" value="{{ cert.link }}"></label>
                 <div class="admin-actions">
                     <button class="button primary" type="submit">Save</button>

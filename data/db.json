@@ -9,7 +9,8 @@
     "github": "https://github.com/MManiChandana",
     "email": "mchandana10m2003@gmail.com",
     "hero_image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1800&q=80",
-    "profile_image": "/static/uploads/54591a32db994f1598d9098388f575b8_ChatGPT_Image_Feb_16_2026_06_47_04_PM.png"
+    "profile_image": "/static/uploads/54591a32db994f1598d9098388f575b8_ChatGPT_Image_Feb_16_2026_06_47_04_PM.png",
+    "profile_video": "/static/uploads/42e69b5ab65e402b8ed1007f5bc92f4b_PixVerse_V6_Image_Text_360P_Use_the_uploaded_i.mp4"
   },
   "skills": [
     {
@@ -61,5 +62,6 @@
       "link": "#"
     }
   ],
-  "messages": []
+  "messages": [],
+  "settings": {}
 }
