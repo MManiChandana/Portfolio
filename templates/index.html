@@ -24,6 +24,21 @@
                     <a class="button primary" href="{{ data.profile.resume }}" target="_blank" rel="noreferrer">Resume</a>
                     <a class="button ghost" href="#projects">Projects</a>
                 </div>
+                <div class="dashboard-panel reveal">
+                    <div class="dashboard-title">Portfolio dashboard</div>
+                    <div class="dashboard-row">
+                        <span>Projects</span>
+                        <strong class="dashboard-value" data-value="{{ data.projects|length }}">0</strong>
+                    </div>
+                    <div class="dashboard-row">
+                        <span>Skills</span>
+                        <strong class="dashboard-value" data-value="{{ data.skills|length }}">0</strong>
+                    </div>
+                    <div class="dashboard-row">
+                        <span>Certifications</span>
+                        <strong class="dashboard-value" data-value="{{ data.certifications|length }}">0</strong>
+                    </div>
+                </div>
             </div>
             <div class="hero-visual reveal">
                 {% if data.profile.profile_video %}

@@ -121,6 +121,24 @@ if (heroVideo) {
     }
 }
 
+function animateDashboardCounters() {
+    document.querySelectorAll(".dashboard-value").forEach((element) => {
+        const endValue = Number(element.dataset.value) || 0;
+        const duration = 700;
+        const stepTime = Math.max(Math.floor(duration / Math.max(endValue, 1)), 20);
+        let current = 0;
+        const timer = setInterval(() => {
+            current += 1;
+            element.textContent = current;
+            if (current >= endValue) {
+                clearInterval(timer);
+            }
+        }, stepTime);
+    });
+}
+
+animateDashboardCounters();
+
 const observer = new IntersectionObserver(
     (entries) => {
         entries.forEach((entry) => {
