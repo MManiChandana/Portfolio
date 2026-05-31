@@ -12,6 +12,37 @@
     </div>
 </nav>
 
+<div id="siteIntro" class="site-intro">
+    <div class="intro-card">
+        <div class="intro-dot"></div>
+        <span>Portfolio launch</span>
+        <h2>Analysis visuals incoming</h2>
+        <p>Watch the preview frames zoom in one by one, then enter the portfolio.</p>
+        <div class="intro-preview">
+            {% if intro_images and intro_images|length > 0 %}
+                {% for image in intro_images[:5] %}
+                <div class="intro-image-wrapper">
+                    <img src="{{ image }}" class="intro-image" alt="analysis preview {{ loop.index }}">
+                </div>
+                {% endfor %}
+            {% else %}
+                {# fallback to profile + project images if no intro_images uploaded #}
+                {% set intro_images_fb = [data.profile.hero_image] %}
+                {% for project in data.projects %}
+                    {% if project.image %}
+                        {% set intro_images_fb = intro_images_fb + [project.image] %}
+                    {% endif %}
+                {% endfor %}
+                {% for image in intro_images_fb[:5] %}
+                <div class="intro-image-wrapper">
+                    <img src="{{ image }}" class="intro-image" alt="analysis preview {{ loop.index }}">
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <button id="introEnter" class="button ghost intro-button">Enter Portfolio</button>
+    </div>
+</div>
 <main id="top">
     <section class="hero" style="--hero-image:url('{{ data.profile.hero_image }}');">
         <div class="hero-grid">
@@ -24,21 +55,7 @@
                     <a class="button primary" href="{{ data.profile.resume }}" target="_blank" rel="noreferrer">Resume</a>
                     <a class="button ghost" href="#projects">Projects</a>
                 </div>
-                <div class="dashboard-panel reveal">
-                    <div class="dashboard-title">Portfolio dashboard</div>
-                    <div class="dashboard-row">
-                        <span>Projects</span>
-                        <strong class="dashboard-value" data-value="{{ data.projects|length }}">0</strong>
-                    </div>
-                    <div class="dashboard-row">
-                        <span>Skills</span>
-                        <strong class="dashboard-value" data-value="{{ data.skills|length }}">0</strong>
-                    </div>
-                    <div class="dashboard-row">
-                        <span>Certifications</span>
-                        <strong class="dashboard-value" data-value="{{ data.certifications|length }}">0</strong>
-                    </div>
-                </div>
+                
             </div>
             <div class="hero-visual reveal">
                 {% if data.profile.profile_video %}
@@ -47,7 +64,8 @@
                 <img src="{{ data.profile.profile_image }}" alt="{{ data.profile.name }}">
                 {% endif %}
                 {% if data.profile.profile_audio and not data.profile.profile_video %}
-                <audio src="{{ data.profile.profile_audio }}" controls style="width: 100%; margin-top: 15px;"></audio>
+                <audio id="heroAudio" src="{{ data.profile.profile_audio }}" controls style="width: 100%; margin-top: 15px;"></audio>
+                <button id="unmuteBtn" class="unmute" aria-label="Enable sound">Enable sound</button>
                 {% endif %}
             </div>
         </div>

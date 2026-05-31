@@ -7,6 +7,8 @@ from datetime import datetime, timedelta
 from email.message import EmailMessage
 from pathlib import Path
 from urllib.parse import quote
+import urllib.request
+import urllib.parse
 
 from flask import Flask, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -20,6 +22,8 @@ ROOT = Path(__file__).parent
 DATA_FILE = ROOT / "data" / "db.json"
 UPLOAD_DIR = ROOT / "static" / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+INTRO_DIR = UPLOAD_DIR / "intro"
+INTRO_DIR.mkdir(parents=True, exist_ok=True)
 
 ALLOWED_UPLOADS = {"png", "jpg", "jpeg", "gif", "webp", "pdf", "mp4", "mov", "webm"}
 ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "mchandana10m2003@gmail.com").lower()
@@ -94,6 +98,7 @@ DEFAULT_DATA = {
     ],
     "messages": [],
     "settings": {},
+    "intro_images": [],
 }
 
 
@@ -154,6 +159,20 @@ def uploaded_url(field_name):
     filename = f"{uuid.uuid4().hex}_{secure_filename(file.filename)}"
     file.save(UPLOAD_DIR / filename)
     return url_for("static", filename=f"uploads/{filename}")
+
+
+def uploaded_intro_url(field_name):
+    file = request.files.get(field_name)
+    if not file or not file.filename:
+        return ""
+
+    extension = file.filename.rsplit(".", 1)[-1].lower() if "." in file.filename else ""
+    if extension not in ALLOWED_UPLOADS:
+        return ""
+
+    filename = f"{uuid.uuid4().hex}_{secure_filename(file.filename)}"
+    file.save(INTRO_DIR / filename)
+    return url_for("static", filename=f"uploads/intro/{filename}")
 
 
 def update_from_form(target, fields):
@@ -224,7 +243,20 @@ def send_password_reset_email(reset_link):
 
 @app.route("/")
 def home():
-    return render_template("index.html", data=load_data())
+    data = load_data()
+    # Prefer intro image list stored in data (admin-managed), otherwise read folder
+    intro_images = data.get("intro_images", []) or []
+    if not intro_images:
+        try:
+            for p in sorted(INTRO_DIR.iterdir()):
+                if p.is_file():
+                    intro_images.append(url_for("static", filename=f"uploads/intro/{p.name}"))
+                if len(intro_images) >= 8:
+                    break
+        except Exception:
+            intro_images = []
+
+    return render_template("index.html", data=data, intro_images=intro_images)
 
 
 @app.route("/admin-login", methods=["GET", "POST"])
@@ -387,6 +419,75 @@ def admin():
                     "image": image,
                 }
             )
+
+        elif action == "add_intro_image":
+            added = []
+            # handle multiple uploaded files input name intro_image_files
+            files = request.files.getlist("intro_image_files")
+            for f in files:
+                if f and f.filename:
+                    extension = f.filename.rsplit(".", 1)[-1].lower() if "." in f.filename else ""
+                    if extension in ALLOWED_UPLOADS:
+                        filename = f"{uuid.uuid4().hex}_{secure_filename(f.filename)}"
+                        f.save(INTRO_DIR / filename)
+                        added.append(url_for("static", filename=f"uploads/intro/{filename}"))
+
+            # fallback single file field name (backwards compatibility)
+            single = uploaded_intro_url("intro_image_file")
+            if single:
+                added.append(single)
+
+            # also allow a pasted URL
+            url_field = request.form.get("intro_image", "").strip()
+            if url_field:
+                # if it's a remote URL, download and save it locally for permanence
+                if url_field.lower().startswith("http"):
+                    try:
+                        parsed = urllib.parse.urlparse(url_field)
+                        basename = Path(parsed.path).name
+                        ext = basename.rsplit('.', 1)[-1].lower() if '.' in basename else ''
+                        if ext not in ALLOWED_UPLOADS:
+                            # try to detect from content-type
+                            resp = urllib.request.urlopen(url_field)
+                            ctype = resp.headers.get_content_type()
+                            mapping = {'image/jpeg':'jpg','image/png':'png','image/gif':'gif','image/webp':'webp'}
+                            ext = mapping.get(ctype, '')
+                            data_bytes = resp.read()
+                        else:
+                            data_bytes = urllib.request.urlopen(url_field).read()
+
+                        if ext and ext in ALLOWED_UPLOADS:
+                            filename = f"{uuid.uuid4().hex}_{secure_filename(basename)}"
+                            with open(INTRO_DIR / filename, 'wb') as out_f:
+                                out_f.write(data_bytes)
+                            added.append(url_for("static", filename=f"uploads/intro/{filename}"))
+                        else:
+                            # fallback: store original URL (not downloaded)
+                            added.append(url_field)
+                    except Exception:
+                        # if download fails, still store URL
+                        added.append(url_field)
+                else:
+                    added.append(url_field)
+
+            if added:
+                data.setdefault("intro_images", []).extend(added)
+
+        elif action == "remove_intro":
+            index = int(request.form.get("index", 0))
+            imgs = data.get("intro_images", [])
+            if 0 <= index < len(imgs):
+                removed = imgs.pop(index)
+                # if removed points to a local uploads/intro file, delete it from disk
+                try:
+                    if isinstance(removed, str) and 'uploads/intro/' in removed:
+                        fname = removed.split('uploads/intro/')[-1]
+                        fpath = INTRO_DIR / fname
+                        if fpath.exists():
+                            fpath.unlink()
+                except Exception:
+                    pass
+                data["intro_images"] = imgs
 
         elif action == "update_certification":
             index = int(request.form.get("index", 0))

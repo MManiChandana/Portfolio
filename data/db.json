@@ -10,7 +10,8 @@
     "email": "mchandana10m2003@gmail.com",
     "hero_image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1800&q=80",
     "profile_image": "/static/uploads/54591a32db994f1598d9098388f575b8_ChatGPT_Image_Feb_16_2026_06_47_04_PM.png",
-    "profile_video": "/static/uploads/42e69b5ab65e402b8ed1007f5bc92f4b_PixVerse_V6_Image_Text_360P_Use_the_uploaded_i.mp4"
+    "profile_video": "/static/uploads/42e69b5ab65e402b8ed1007f5bc92f4b_PixVerse_V6_Image_Text_360P_Use_the_uploaded_i.mp4",
+    "profile_audio": ""
   },
   "skills": [
     {
@@ -63,5 +64,10 @@
     }
   ],
   "messages": [],
-  "settings": {}
+  "settings": {},
+  "intro_images": [
+    "/static/uploads/intro/9ba1e772c8074e2ea1a5cfffc0941fea_Screenshot_2026-03-24_094849.png",
+    "/static/uploads/intro/b02a04702c5b408788324e342653aef3_Screenshot_2026-03-28_130930.png",
+    "/static/uploads/intro/ca45eafa70d4428bbed04ecbe44a36dd_Screenshot_2026-03-30_120836.png"
+  ]
 }
