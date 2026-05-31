@@ -87,6 +87,40 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
+const heroVideo = document.getElementById("heroVideo");
+if (heroVideo) {
+    const storageKey = "portfolioHeroVideoPlayed";
+    const isFirstVisit = localStorage.getItem(storageKey) !== "true";
+    const heroObserver = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.target !== heroVideo) {
+                    return;
+                }
+                if (!entry.isIntersecting && !heroVideo.paused) {
+                    heroVideo.pause();
+                }
+            });
+        },
+        { threshold: 0.25 }
+    );
+
+    heroObserver.observe(heroVideo);
+
+    heroVideo.addEventListener("play", () => {
+        localStorage.setItem(storageKey, "true");
+    });
+
+    if (isFirstVisit) {
+        heroVideo.muted = true;
+        heroVideo.play().then(() => {
+            heroVideo.muted = false;
+        }).catch(() => {
+            heroVideo.muted = true;
+        });
+    }
+}
+
 const observer = new IntersectionObserver(
     (entries) => {
         entries.forEach((entry) => {

@@ -27,11 +27,11 @@
             </div>
             <div class="hero-visual reveal">
                 {% if data.profile.profile_video %}
-                <video src="{{ data.profile.profile_video }}" alt="{{ data.profile.name }}" autoplay muted loop playsinline></video>
+                <video id="heroVideo" src="{{ data.profile.profile_video }}" alt="{{ data.profile.name }}" controls loop playsinline></video>
                 {% else %}
                 <img src="{{ data.profile.profile_image }}" alt="{{ data.profile.name }}">
                 {% endif %}
-                {% if data.profile.profile_audio %}
+                {% if data.profile.profile_audio and not data.profile.profile_video %}
                 <audio src="{{ data.profile.profile_audio }}" controls style="width: 100%; margin-top: 15px;"></audio>
                 {% endif %}
             </div>
@@ -65,7 +65,11 @@
         <div class="project-rail reveal">
             {% for project in data.projects %}
             <article class="project-card">
+                {% if project.image %}
                 <img src="{{ project.image }}" alt="{{ project.title }}">
+                {% else %}
+                <div class="project-image-placeholder">No project image</div>
+                {% endif %}
                 <div class="project-body">
                     <p class="tech">{{ project.tech }}</p>
                     <h3>{{ project.title }}</h3>
@@ -103,6 +107,8 @@
             <a class="cert-card reveal" href="{{ cert.link }}" target="_blank" rel="noreferrer">
                 {% if cert.image %}
                 <img src="{{ cert.image }}" alt="{{ cert.title }} certificate">
+                {% else %}
+                <div class="cert-image-placeholder">No certificate image</div>
                 {% endif %}
                 <span>{{ cert.date }}</span>
                 <h3>{{ cert.title }}</h3>
