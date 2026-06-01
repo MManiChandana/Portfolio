@@ -58,12 +58,8 @@
                 
             </div>
             <div class="hero-visual reveal">
-                {% if data.profile.profile_video %}
-                <video id="heroVideo" src="{{ data.profile.profile_video }}" alt="{{ data.profile.name }}" controls loop playsinline></video>
-                {% else %}
                 <img src="{{ data.profile.profile_image }}" alt="{{ data.profile.name }}">
-                {% endif %}
-                {% if data.profile.profile_audio and not data.profile.profile_video %}
+                {% if data.profile.profile_audio %}
                 <audio id="heroAudio" src="{{ data.profile.profile_audio }}" controls style="width: 100%; margin-top: 15px;"></audio>
                 <button id="unmuteBtn" class="unmute" aria-label="Enable sound">Enable sound</button>
                 {% endif %}
@@ -137,7 +133,12 @@
         </div>
         <div class="cert-grid">
             {% for cert in data.certifications %}
-            <a class="cert-card reveal" href="{{ cert.link }}" target="_blank" rel="noreferrer">
+            <button class="cert-card cert-detail reveal" type="button"
+                data-title="{{ cert.title }}"
+                data-desc="{{ cert.issuer }}{% if cert.date %} - {{ cert.date }}{% endif %}"
+                data-tech="Certification"
+                data-image="{{ cert.image }}"
+                data-link="{{ cert.link }}">
                 {% if cert.image %}
                 <img src="{{ cert.image }}" alt="{{ cert.title }} certificate">
                 {% else %}
@@ -146,11 +147,41 @@
                 <span>{{ cert.date }}</span>
                 <h3>{{ cert.title }}</h3>
                 <p>{{ cert.issuer }}</p>
-            </a>
+            </button>
             {% else %}
             <p class="empty">No certifications added yet.</p>
             {% endfor %}
         </div>
+
+        {% if data.virtual_projects %}
+        <div class="virtual-projects-block">
+            <div class="section-heading reveal">
+                <p class="eyebrow">Company Simulations</p>
+                <h2>Virtual Projects</h2>
+            </div>
+            <div class="virtual-project-grid">
+                {% for item in data.virtual_projects %}
+                <button class="virtual-project-card virtual-project-detail reveal" type="button"
+                    data-title="{{ item.title }}"
+                    data-desc="{{ item.details or item.description }}"
+                    data-tech="{{ item.company }}{% if item.skills %} - {{ item.skills }}{% endif %}"
+                    data-image="{{ item.image }}"
+                    data-link="{{ item.link }}">
+                    {% if item.image %}
+                    <img src="{{ item.image }}" alt="{{ item.title }}">
+                    {% else %}
+                    <div class="project-image-placeholder">No project image</div>
+                    {% endif %}
+                    <div class="virtual-project-body">
+                        <span>{{ item.company }}</span>
+                        <h3>{{ item.title }}</h3>
+                        <p>{{ item.description }}</p>
+                    </div>
+                </button>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
     </section>
 
     <section class="section contact-section" id="contact">

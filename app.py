@@ -96,6 +96,7 @@ DEFAULT_DATA = {
             "image": "",
         }
     ],
+    "virtual_projects": [],
     "messages": [],
     "settings": {},
     "intro_images": [],
@@ -125,6 +126,7 @@ def normalize_data(data):
         project.setdefault("repo_link", "#")
 
     data.setdefault("certifications", [])
+    data.setdefault("virtual_projects", [])
     data.setdefault("messages", [])
     data.setdefault("settings", {})
     return data
@@ -245,7 +247,15 @@ def send_password_reset_email(reset_link):
 def home():
     data = load_data()
     # Prefer intro image list stored in data (admin-managed), otherwise read folder
-    intro_images = data.get("intro_images", []) or []
+    intro_images = []
+    for image in data.get("intro_images", []) or []:
+        if image.startswith("/static/uploads/"):
+            image_path = UPLOAD_DIR / urllib.parse.unquote(image.split("/static/uploads/", 1)[1])
+            if image_path.exists():
+                intro_images.append(image)
+        else:
+            intro_images.append(image)
+
     if not intro_images:
         try:
             for p in sorted(INTRO_DIR.iterdir()):
@@ -420,6 +430,20 @@ def admin():
                 }
             )
 
+        elif action == "add_virtual_project":
+            image = uploaded_url("image_file") or request.form.get("image", "").strip()
+            data.setdefault("virtual_projects", []).append(
+                {
+                    "title": request.form.get("title", "").strip(),
+                    "company": request.form.get("company", "").strip(),
+                    "description": request.form.get("description", "").strip(),
+                    "details": request.form.get("details", "").strip(),
+                    "skills": request.form.get("skills", "").strip(),
+                    "image": image,
+                    "link": request.form.get("link", "").strip(),
+                }
+            )
+
         elif action == "add_intro_image":
             added = []
             # handle multiple uploaded files input name intro_image_files
@@ -496,6 +520,13 @@ def admin():
             if uploaded:
                 data["certifications"][index]["image"] = uploaded
 
+        elif action == "update_virtual_project":
+            index = int(request.form.get("index", 0))
+            update_from_form(data["virtual_projects"][index], ["title", "company", "description", "details", "skills", "image", "link"])
+            uploaded = uploaded_url("image_file")
+            if uploaded:
+                data["virtual_projects"][index]["image"] = uploaded
+
         save_data(data)
         return redirect(url_for("admin"))
 
@@ -508,7 +539,7 @@ def delete_item(section, index):
         return redirect(url_for("admin_login"))
 
     data = load_data()
-    if section in {"skills", "projects", "certifications", "messages"} and 0 <= index < len(data.get(section, [])):
+    if section in {"skills", "projects", "certifications", "virtual_projects", "messages"} and 0 <= index < len(data.get(section, [])):
         data[section].pop(index)
         save_data(data)
     return redirect(url_for("admin"))

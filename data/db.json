@@ -10,7 +10,7 @@
     "email": "mchandana10m2003@gmail.com",
     "hero_image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1800&q=80",
     "profile_image": "/static/uploads/54591a32db994f1598d9098388f575b8_ChatGPT_Image_Feb_16_2026_06_47_04_PM.png",
-    "profile_video": "/static/uploads/42e69b5ab65e402b8ed1007f5bc92f4b_PixVerse_V6_Image_Text_360P_Use_the_uploaded_i.mp4",
+    "profile_video": "",
     "profile_audio": ""
   },
   "skills": [
@@ -42,32 +42,89 @@
       "details": "This project analyzes retail sales performance across regions, categories, and time periods using clean KPI views and business-focused dashboards.",
       "tech": "SQL - Power BI - Analytics",
       "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
-      "live_link": "#",
-      "repo_link": "#"
+      "repo_link": "https://github.com/MManiChandana/Retail_dashboard_project"
     },
     {
       "title": "Customer Segment Analysis",
       "description": "Exploratory data analysis using Python, Pandas, and visualization libraries.",
       "details": "A complete EDA project focused on cleaning the Netflix dataset, finding trends, and presenting insights through useful visualizations.",
       "tech": "Python - Pandas - Visualization",
-      "image": "/static/uploads/d7907a98884a47f09479b02f01bb62fa_Screenshot_2026-05-29_234532.png",
+      "image": "/static/uploads/Customer_Segementation.png",
       "live_link": "https://customer-segment-analysis.streamlit.app/",
       "repo_link": "https://github.com/MManiChandana/Customer-segment-Analysis/tree/main"
+    },
+    {
+      "title": "Natural Gas Storage Valuation & Forecasting",
+      "description": "Prediction of natural gas storage valuation using machine learning regression models.",
+      "details": "Built a natural gas price forecasting model using 48 months of historical market data, achieving an RMSE of 0.1997 and MAE of 0.1498. Simulated storage contract strategies to identify profitable injection and withdrawal periods, resulting in an estimated contract value of $1,590. Utilized Python for forecasting, valuation, and financial analysis.",
+      "tech": "Python - Pandas - Visualization - Machine Learning - Regression - Forecasting - Risk Analysis",
+      "image": "/static/uploads/Natural_Gas_Storage_Valuation.png",
+      "repo_link": "https://github.com/MManiChandana/Natural_Gas_Analysis"
+    },
+    {
+      "title": "Credit Risk Analysis & FICO Rating Model",
+      "description": "Prediction of credit risk and FICO score using machine learning classification models.",
+      "details": "Developed a credit risk assessment model to predict default probabilities and calculate FICO scores based on historical financial data. Achieved high accuracy in identifying risky borrowers and provided actionable insights for loan underwriting decisions.",
+      "tech": "Python - Pandas - Visualization - Machine Learning - Classification - Risk Analysis",
+      "image": "/static/uploads/Credit_Risk_analysis_and_FICO_Rating_Model.png",
+      "repo_link": "https://github.com/MManiChandana/Natural_Gas_Analysis"
+    },
+    {
+      "title": "Library Management System",
+      "description": "A database for managing library resources and user interactions.",
+      "details": "Developed a comprehensive library management system using SQL.",
+      "tech": "SQL - Power BI - Analytics",
+      "image": "/static/uploads/Library_Management_System.png",
+      "repo_link": "https://github.com/MManiChandana/LibraryManagementSystem_SQL_workbench"
+    },
+    {
+      "title": "Credit card fraud detection",
+      "description": "A web-based application for managing library resources and user interactions.",
+      "details": "Developed a comprehensive library management system using SQL.",
+      "tech": "SQL - Power BI - Analytics",
+      "image": "/static/uploads/Credit_Card_Fraud_Detection.png",
+      "repo_link": "https://github.com/MManiChandana/Credit_Card_Fraud_Detection_Project"
+    },
+    {
+      "title": "Excel Business Analytics Dashboard",
+      "description": "An interactive Excel dashboard for business analytics and decision-making.",
+      "details": "Developed an interactive Business Analytics Dashboard in Excel to monitor key business performance metrics and support data-driven decision-making. Utilized Pivot Tables, Power Query, advanced formulas, and dynamic charts to analyze sales, profit, customer behavior, and regional performance. Designed an intuitive dashboard with slicers and KPI cards to provide real-time business insights and trend analysis for stakeholders.",
+      "tech": "Excel - Power BI - Analytics",
+      "image": "/static/uploads/ChatGPT Image Jun 1, 2026, 08_58_31 PM.png",
+      "repo_link": "#"
     }
   ],
   "certifications": [
     {
-      "title": "Data Analytics Certification",
-      "issuer": "Add Issuer",
-      "date": "2026",
-      "link": "#"
+      "title": "Foundations of Data Analysis",
+      "issuer": "Coursera with Google",
+      "image": "/static/uploads/Coursera_FDA.png"
+    },
+    {
+      "title": "Data Analysis by Google Analytics Academy [Begineer Level]",
+      "issuer": "Google Analytics Academy",
+      "image": "/static/uploads/Google_DAB.png"
+    },
+    {
+      "title": "Data Analysis by Google Analytics Academy [Advanced Level]",
+      "issuer": "Google Analytics Academy",
+      "image": "/static/uploads/Google_DAA.png"
+    }
+  ],
+  "virtual_projects": [
+    {
+      "title": "Data Analysis by Google Analytics Academy [Advanced Level]",
+      "issuer": "Google Analytics Academy",
+      "image": "/static/uploads/Google_DAA.png"
     }
   ],
   "messages": [],
   "settings": {},
   "intro_images": [
-    "/static/uploads/intro/9ba1e772c8074e2ea1a5cfffc0941fea_Screenshot_2026-03-24_094849.png",
-    "/static/uploads/intro/b02a04702c5b408788324e342653aef3_Screenshot_2026-03-28_130930.png",
-    "/static/uploads/intro/ca45eafa70d4428bbed04ecbe44a36dd_Screenshot_2026-03-30_120836.png"
+    "/static/uploads/intro/Screenshot1.png",
+    "/static/uploads/intro/Screenshot2.png",
+    "/static/uploads/intro/Screenshot3.png",
+    "/static/uploads/intro/Screenshot4.png",
+    "/static/uploads/intro/Screenshot5.png"
   ]
 }

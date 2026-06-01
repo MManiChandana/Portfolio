@@ -125,6 +125,22 @@
             <button class="button primary" type="submit">Add Certification</button>
         </form>
 
+        <form class="admin-card" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="action" value="add_virtual_project">
+            <h2>Add Virtual Project</h2>
+            <label>Title<input name="title" required></label>
+            <label>Company<input name="company" placeholder="Deloitte, BCG, JPMorgan..." required></label>
+            <label>Short description<textarea name="description" required></textarea></label>
+            <label>Full details<textarea name="details"></textarea></label>
+            <label>Skills/tools<input name="skills" placeholder="Excel - SQL - Power BI"></label>
+            <label>Image link<input name="image" placeholder="https://..."></label>
+            <label>Upload image<input type="file" name="image_file" accept="image/*"></label>
+            <label>Experience/certificate link<input name="link"></label>
+            <button class="button primary" type="submit">Add Virtual Project</button>
+        </form>
+    </section>
+
+    <section class="admin-section two-col">
         <div class="admin-card">
             <h2>Intro Images</h2>
             <form method="POST" class="" enctype="multipart/form-data">
@@ -187,6 +203,36 @@
                 </div>
             </form>
             <form id="delete-cert-{{ loop.index0 }}" method="POST" action="{{ url_for('delete_item', section='certifications', index=loop.index0) }}"></form>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="admin-section">
+        <h2>Existing Virtual Projects</h2>
+        <div class="editor-grid">
+            {% for item in data.virtual_projects %}
+            <form class="admin-card compact" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="update_virtual_project">
+                <input type="hidden" name="index" value="{{ loop.index0 }}">
+                {% if item.image %}
+                <img class="admin-preview" src="{{ item.image }}" alt="{{ item.title }}">
+                {% endif %}
+                <label>Title<input name="title" value="{{ item.title }}"></label>
+                <label>Company<input name="company" value="{{ item.company }}"></label>
+                <label>Short description<textarea name="description">{{ item.description }}</textarea></label>
+                <label>Full details<textarea name="details">{{ item.details }}</textarea></label>
+                <label>Skills/tools<input name="skills" value="{{ item.skills }}"></label>
+                <label>Image link<input name="image" value="{{ item.image }}"></label>
+                <label>Upload image<input type="file" name="image_file" accept="image/*"></label>
+                <label>Link<input name="link" value="{{ item.link }}"></label>
+                <div class="admin-actions">
+                    <button class="button primary" type="submit">Save</button>
+                    <button class="danger" form="delete-virtual-project-{{ loop.index0 }}" type="submit">Delete</button>
+                </div>
+            </form>
+            <form id="delete-virtual-project-{{ loop.index0 }}" method="POST" action="{{ url_for('delete_item', section='virtual_projects', index=loop.index0) }}"></form>
+            {% else %}
+            <p class="empty">No virtual projects yet.</p>
             {% endfor %}
         </div>
     </section>
