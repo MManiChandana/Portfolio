@@ -113,10 +113,38 @@
   ],
   "virtual_projects": [
     {
-      "title": "Data Analysis by Google Analytics Academy [Advanced Level]",
-      "issuer": "Google Analytics Academy",
-      "image": "/static/uploads/Google_DAA.png"
+      "title": "Market Quantitative Analysis",
+      "issuer": "Citi Virtual Internship via forage",
+      "description": "A virtual internship opportunity to gain hands-on experience in market quantitative analysis.",
+      "details": "Completed a quantitative finance job simulation focused on financial risk management, securities structuring, quantitative analysis, and market research. Applied data-driven techniques to analyze financial scenarios, assess risk factors, and support decision-making in capital markets. Developed practical exposure to the responsibilities of a Markets Quant Analyst within a global banking environment.\n\nSkills: Quantitative Analysis, Financial Risk Management, Market Research, Financial Modeling, Data Analysis",
+      "image": "/static/uploads/image.png",
+      "link": "https://www.theforage.com/completion-certificates/8eNRcRqBZM9HLvwGw/fAuNBibfF4dzrgtDY_8eNRcRqBZM9HLvwGw_69906f33147ed75a2fde8693_1774022298760_completion_certificate.pdf"
+    },
+    {
+      "title": "Quantitative Research and Job Stimulation",
+      "issuer": "JP Morgan & Co. Virtual Internship via forage",
+      "description": "A virtual internship opportunity to gain hands-on experience in market quantitative analysis.",
+      "details": "Completed a quantitative finance job simulation focused on financial risk management, securities structuring, quantitative analysis, and market research. Applied data-driven techniques to analyze financial scenarios, assess risk factors, and support decision-making in capital markets. Developed practical exposure to the responsibilities of a Markets Quant Analyst within a global banking environment.\n\nSkills: Quantitative Analysis, Financial Risk Management, Market Research, Financial Modeling, Data Analysis",
+      "image": "/static/uploads/image2.png",
+      "link": "https://www.theforage.com/completion-certificates/Sj7temL583QAYpHXD/bWqaecPDbYAwSDqJy_Sj7temL583QAYpHXD_69906f33147ed75a2fde8693_1774848542891_completion_certificate.pdf"
+    },
+    {
+      "title": "Quantitative Research and Job Stimulation",
+      "issuer": "Quantium Virtual Internship via forage",
+      "description": " A virtual internship opportunity to gain hands-on experience in financial quantitative analysis.",
+      "details": "Completed a quantitative research job simulation focused on data analysis, financial modeling, and quantitative problem-solving. Applied Python and analytical techniques to forecast natural gas prices, evaluate storage contract profitability, and perform credit risk assessment using borrower data. Gained hands-on experience in financial analytics, risk management, and data-driven decision-making through real-world quantitative research tasks.\n\nSkills: Python, Quantitative Research, Financial Modeling, Data Analysis, Risk Analytics, Forecasting, Credit Risk Assessment",
+      "image": "/static/uploads/image3.png",
+      "link": "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Sj7temL583QAYpHXD/bWqaecPDbYAwSDqJy_Sj7temL583QAYpHXD_69906f33147ed75a2fde8693_1774848542891_completion_certificate.pdf"
+    },
+    {
+      "title": "Quantitative Research and Job Stimulation",
+      "issuer": "Quantium Virtual Internship via forage",
+      "description": " A virtual internship opportunity to gain hands-on experience in financial quantitative analysis.",
+      "details": "Completed a quantitative research job simulation focused on data analysis, financial modeling, and quantitative problem-solving. Applied Python and analytical techniques to forecast natural gas prices, evaluate storage contract profitability, and perform credit risk assessment using borrower data. Gained hands-on experience in financial analytics, risk management, and data-driven decision-making through real-world quantitative research tasks.\n\nSkills: Python, Quantitative Research, Financial Modeling, Data Analysis, Risk Analytics, Forecasting, Credit Risk Assessment",
+      "image": "/static/uploads/image3.png",
+      "link": "https://www.theforage.com/completion-certificates/32A6DqtsbF7LbKdcq/NkaC7knWtjSbi6aYv_32A6DqtsbF7LbKdcq_69906f33147ed75a2fde8693_1774086452640_completion_certificate.pdf"
     }
+
   ],
   "messages": [],
   "settings": {},
