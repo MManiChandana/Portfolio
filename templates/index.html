@@ -7,6 +7,7 @@
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#certifications">Certifications</a>
+        <a href="#virtual-experience">Virtual Experience</a>
         <a href="#contact">Contact</a>
         <a href="{{ url_for('admin') }}">Admin</a>
     </div>
@@ -152,37 +153,44 @@
             <p class="empty">No certifications added yet.</p>
             {% endfor %}
         </div>
-
-        {% if data.virtual_projects %}
-        <div class="virtual-projects-block">
-            <div class="section-heading reveal">
-                <p class="eyebrow">Company Simulations</p>
-                <h2>Virtual Projects</h2>
-            </div>
-            <div class="virtual-project-grid">
-                {% for item in data.virtual_projects %}
-                <button class="virtual-project-card virtual-project-detail reveal" type="button"
-                    data-title="{{ item.title }}"
-                    data-desc="{{ item.details or item.description }}"
-                    data-tech="{{ item.company }}{% if item.skills %} - {{ item.skills }}{% endif %}"
-                    data-image="{{ item.image }}"
-                    data-link="{{ item.link }}">
-                    {% if item.image %}
-                    <img src="{{ item.image }}" alt="{{ item.title }}">
-                    {% else %}
-                    <div class="project-image-placeholder">No project image</div>
-                    {% endif %}
-                    <div class="virtual-project-body">
-                        <span>{{ item.company }}</span>
-                        <h3>{{ item.title }}</h3>
-                        <p>{{ item.description }}</p>
-                    </div>
-                </button>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
     </section>
+
+    {% if data.virtual_projects %}
+    <section class="section virtual-experience-section" id="virtual-experience">
+        <div class="section-heading reveal">
+            <p class="eyebrow">Company Simulations</p>
+            <h2>Virtual Experience</h2>
+        </div>
+        <div class="virtual-project-grid">
+            {% for item in data.virtual_projects %}
+            {% set company = item.company or item.issuer %}
+            {% set description = item.description or item.details or company %}
+            <button class="virtual-project-card virtual-project-detail reveal" type="button"
+                data-title="{{ item.title }}"
+                data-desc="{{ item.details or item.description or company }}"
+                data-tech="{{ company }}{% if item.skills %} - {{ item.skills }}{% endif %}"
+                data-image="{{ item.image }}"
+                data-link="{{ item.link }}">
+                {% if item.image %}
+                <img src="{{ item.image }}" alt="{{ item.title }}">
+                {% else %}
+                <div class="project-image-placeholder">No experience image</div>
+                {% endif %}
+                <div class="virtual-project-body">
+                    {% if company %}
+                    <span>{{ company }}</span>
+                    {% endif %}
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ description }}</p>
+                    {% if item.skills %}
+                    <strong>{{ item.skills }}</strong>
+                    {% endif %}
+                </div>
+            </button>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
 
     <section class="section contact-section" id="contact">
         <div class="contact-copy reveal">

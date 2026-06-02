@@ -74,7 +74,7 @@
       "description": "A database for managing library resources and user interactions.",
       "details": "Developed a comprehensive library management system using SQL.",
       "tech": "SQL - Power BI - Analytics",
-      "image": "/static/uploads/Library_Management_System.png",
+      "image": "/static/uploads/intro/Screenshot2.png",
       "repo_link": "https://github.com/MManiChandana/LibraryManagementSystem_SQL_workbench"
     },
     {
@@ -82,7 +82,7 @@
       "description": "A web-based application for managing library resources and user interactions.",
       "details": "Developed a comprehensive library management system using SQL.",
       "tech": "SQL - Power BI - Analytics",
-      "image": "/static/uploads/Credit_Card_Fraud_Detection.png",
+      "image": "/static/uploads/Credit_card_fruad_Detection.png",
       "repo_link": "https://github.com/MManiChandana/Credit_Card_Fraud_Detection_Project"
     },
     {
@@ -90,7 +90,7 @@
       "description": "An interactive Excel dashboard for business analytics and decision-making.",
       "details": "Developed an interactive Business Analytics Dashboard in Excel to monitor key business performance metrics and support data-driven decision-making. Utilized Pivot Tables, Power Query, advanced formulas, and dynamic charts to analyze sales, profit, customer behavior, and regional performance. Designed an intuitive dashboard with slicers and KPI cards to provide real-time business insights and trend analysis for stakeholders.",
       "tech": "Excel - Power BI - Analytics",
-      "image": "/static/uploads/ChatGPT Image Jun 1, 2026, 08_58_31 PM.png",
+      "image": "/static/uploads/Excel_Business_Analytics_Dashboard.png",
       "repo_link": "#"
     }
   ],

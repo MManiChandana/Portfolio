@@ -127,6 +127,13 @@ def normalize_data(data):
 
     data.setdefault("certifications", [])
     data.setdefault("virtual_projects", [])
+    for virtual_project in data.get("virtual_projects", []):
+        virtual_project.setdefault("company", virtual_project.get("issuer", ""))
+        virtual_project.setdefault("description", virtual_project.get("details", ""))
+        virtual_project.setdefault("details", virtual_project.get("description", ""))
+        virtual_project.setdefault("skills", "")
+        virtual_project.setdefault("image", "")
+        virtual_project.setdefault("link", "")
     data.setdefault("messages", [])
     data.setdefault("settings", {})
     return data
