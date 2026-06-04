@@ -727,6 +727,10 @@ footer{
     box-shadow:var(--shadow);
 }
 
+.modal.is-image-view .modal-panel{
+    width:min(980px,100%);
+}
+
 .modal-close{
     position:absolute;
     top:12px;
@@ -749,6 +753,13 @@ footer{
 
 .modal-image[src]:not([src=""]){
     display:block;
+}
+
+.modal.is-image-view .modal-image{
+    height:auto;
+    max-height:72vh;
+    object-fit:contain;
+    background:var(--panel-2);
 }
 
 .modal-desc{

@@ -1,11 +1,12 @@
 const modal = document.querySelector("#infoModal");
 
-function openModal({ title, desc, tech, image, live, repo, liveLabel }) {
+function openModal({ title, desc, tech, image, live, repo, liveLabel, imageMode }) {
     if (!modal) {
         return;
     }
 
     modal.classList.add("is-open");
+    modal.classList.toggle("is-image-view", imageMode === "full");
     modal.setAttribute("aria-hidden", "false");
     modal.querySelector("h2").textContent = title || "";
     modal.querySelector(".modal-desc").textContent = desc || "";
@@ -43,6 +44,7 @@ function closeModal() {
     }
 
     modal.classList.remove("is-open");
+    modal.classList.remove("is-image-view");
     modal.setAttribute("aria-hidden", "true");
 }
 
@@ -82,6 +84,7 @@ document.querySelectorAll(".cert-detail").forEach((button) => {
             live: button.dataset.link,
             repo: "",
             liveLabel: "Open Certificate",
+            imageMode: "full",
         });
     });
 });
@@ -96,6 +99,7 @@ document.querySelectorAll(".virtual-project-detail").forEach((button) => {
             live: button.dataset.link,
             repo: "",
             liveLabel: "Open Experience",
+            imageMode: "full",
         });
     });
 });
