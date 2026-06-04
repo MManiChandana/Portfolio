@@ -32,7 +32,24 @@
     {
       "name": "Machine Learning",
       "desc": "I use machine learning to explore patterns, train predictive models, evaluate results, and improve decisions.",
-      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
+      "logo": [
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg",
+        "https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png"
+      ]
+    },
+    {
+      "name": "Statistics",
+      "desc": "Statistics is the foundation of my data analysis, helping me understand distributions, relationships, and significance.",
+      "logo": "https://img.icons8.com/ios-filled/100/000000/statistics.png"
+    },
+    {
+      "name": "EDA",
+      "desc": "Exploratory Data Analysis to uncover patterns, clean data, and prepare actionable insights.",
+      "logo": [
+        "https://pandas.pydata.org/static/img/pandas.svg",
+        "https://seaborn.pydata.org/_static/logo-wide-lightbg.svg",
+        "https://img.icons8.com/color/96/000000/matplotlib.png"
+      ]
     }
   ],
   "projects": [

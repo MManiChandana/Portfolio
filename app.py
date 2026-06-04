@@ -118,7 +118,14 @@ def normalize_data(data):
     for skill in data.get("skills", []):
         if "desc" not in skill:
             skill["desc"] = skill.get("description", "")
-        skill.setdefault("logo", "")
+        # normalize logo field: allow either a single string or a list of strings
+        logo_val = skill.get("logo", "")
+        if isinstance(logo_val, list):
+            skill["logo"] = logo_val
+        elif logo_val:
+            skill["logo"] = [logo_val]
+        else:
+            skill["logo"] = []
 
     for project in data.get("projects", []):
         project.setdefault("details", project.get("description", ""))

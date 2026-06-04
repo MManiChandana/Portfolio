@@ -1,6 +1,6 @@
 const modal = document.querySelector("#infoModal");
 
-function openModal({ title, desc, tech, image, live, repo, liveLabel, imageMode }) {
+function openModal({ title, desc, tech, image, live, repo, liveLabel, imageMode, logos }) {
     if (!modal) {
         return;
     }
@@ -9,6 +9,22 @@ function openModal({ title, desc, tech, image, live, repo, liveLabel, imageMode 
     modal.classList.toggle("is-image-view", imageMode === "full");
     modal.setAttribute("aria-hidden", "false");
     modal.querySelector("h2").textContent = title || "";
+    const logosContainer = modal.querySelector('.modal-logos');
+    if (logosContainer) {
+        logosContainer.innerHTML = '';
+        try {
+            if (Array.isArray(logos)) {
+                logos.forEach((src) => {
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.alt = title + ' logo';
+                    logosContainer.appendChild(img);
+                });
+            }
+        } catch (e) {
+            logosContainer.innerHTML = '';
+        }
+    }
     modal.querySelector(".modal-desc").textContent = desc || "";
     modal.querySelector(".modal-tech").textContent = tech || "";
 
@@ -50,6 +66,10 @@ function closeModal() {
 
 document.querySelectorAll(".skill-card").forEach((card) => {
     card.addEventListener("click", () => {
+        let logos = [];
+        try {
+            if (card.dataset.logos) logos = JSON.parse(card.dataset.logos);
+        } catch (e) { logos = []; }
         openModal({
             title: card.dataset.title,
             desc: card.dataset.desc,
@@ -57,6 +77,7 @@ document.querySelectorAll(".skill-card").forEach((card) => {
             image: "",
             live: "",
             repo: "",
+            logos: logos,
         });
     });
 });

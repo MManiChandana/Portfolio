@@ -75,9 +75,13 @@
         </div>
         <div class="skills-grid">
             {% for skill in data.skills %}
-            <button class="skill-card reveal" type="button" data-title="{{ skill.name }}" data-desc="{{ skill.desc }}">
+            <button class="skill-card reveal" type="button" data-title="{{ skill.name }}" data-desc="{{ skill.desc }}" data-logos='{{ skill.logo|tojson }}'>
                 {% if skill.logo %}
-                <img src="{{ skill.logo }}" alt="{{ skill.name }} logo">
+                    <div class="skill-logos">
+                        {% for l in skill.logo %}
+                            <img src="{{ l }}" alt="{{ skill.name }} logo">
+                        {% endfor %}
+                    </div>
                 {% endif %}
                 <span>{{ skill.name }}</span>
             </button>
@@ -210,13 +214,16 @@
 
 <div class="modal" id="infoModal" aria-hidden="true">
     <div class="modal-panel">
-        <button class="modal-close" type="button" aria-label="Close">x</button>
-        <img class="modal-image" src="" alt="">
-        <p class="tech modal-tech"></p>
-        <h2></h2>
-        <p class="modal-desc"></p>
-        <div class="modal-links"></div>
-    </div>
+            <button class="modal-close" type="button" aria-label="Close">x</button>
+            <div class="modal-header">
+                <h2></h2>
+                <div class="modal-logos"></div>
+            </div>
+            <img class="modal-image" src="" alt="">
+            <p class="tech modal-tech"></p>
+            <p class="modal-desc"></p>
+            <div class="modal-links"></div>
+        </div>
 </div>
 
 <footer>

@@ -439,9 +439,30 @@ button:hover,
 }
 
 .skill-card img{
-    width:54px;
-    height:54px;
+    width:64px;
+    height:64px;
     object-fit:contain;
+}
+
+.skill-logos{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.skill-logos img{
+    width:52px;
+    height:52px;
+    object-fit:contain;
+}
+
+/* Ensure logos remain visible on dark backgrounds */
+.skill-card img,
+.skill-logos img{
+    background:#fff;
+    padding:8px;
+    border-radius:10px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.14);
 }
 
 .skill-card span{
@@ -725,6 +746,21 @@ footer{
     background:var(--panel);
     border:1px solid var(--line);
     box-shadow:var(--shadow);
+}
+.modal-header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px;
+}
+.modal-logos img{
+    width:40px;
+    height:40px;
+    object-fit:contain;
+    background:#fff;
+    padding:6px;
+    border-radius:8px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
 }
 
 .modal.is-image-view .modal-panel{
