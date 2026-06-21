@@ -4,34 +4,32 @@
     "role": "Data Analyst | Data Scientist",
     "about": "Data Analyst and Data Scientist passionate about transforming raw data into meaningful business insights using Python, SQL, Power BI, Statistics, and Machine Learning.",
     "hero_lines": "I build clean dashboards, practical analytics workflows, and machine learning experiments that turn raw data into decisions.",
-    "resume": "#",
+    "resume": "https://drive.google.com/file/d/1U7PmtR-nxO63hellguOBK-RHGZkPYkOG/view?usp=drive_link",
     "linkedin": "https://www.linkedin.com/in/mchandana10032003/",
     "github": "https://github.com/MManiChandana",
     "email": "mchandana10m2003@gmail.com",
     "hero_image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1800&q=80",
-    "profile_image": "/static/uploads/54591a32db994f1598d9098388f575b8_ChatGPT_Image_Feb_16_2026_06_47_04_PM.png",
-    "profile_video": "",
-    "profile_audio": ""
+    "profile_image": "/static/uploads/54591a32db994f1598d9098388f575b8_ChatGPT_Image_Feb_16_2026_06_47_04_PM.png"
   },
   "skills": [
     {
       "name": "Python",
-      "desc": "Python is my main language for data cleaning, automation, analysis, machine learning experiments, and backend logic.",
+      "desc": "Leveraged Python to transform raw data into actionable insights through data cleaning, analysis, visualization, and machine learning. Applied libraries such as Pandas, NumPy, Matplotlib, Seaborn, and Scikit-learn to solve data-driven business problems efficiently.",
       "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
     },
     {
       "name": "SQL",
-      "desc": "SQL helps me query, model, and analyze structured data with joins, aggregations, CTEs, and window functions.",
+      "desc": "Harnessed SQL to extract, manipulate, and analyze large datasets, enabling meaningful business insights and informed decision-making. Developed optimized queries using joins, aggregations, subqueries, and window functions for analytical reporting.",
       "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
     },
     {
       "name": "Power BI",
-      "desc": "Power BI lets me design interactive reports, KPI dashboards, and visual stories for business decisions.",
+      "desc": "Designed dynamic and interactive Power BI dashboards that transformed complex datasets into intuitive visual stories. Utilized data modeling and DAX calculations to monitor KPIs and support strategic business decisions.",
       "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azuresqldatabase/azuresqldatabase-original.svg"
     },
     {
       "name": "Machine Learning",
-      "desc": "I use machine learning to explore patterns, train predictive models, evaluate results, and improve decisions.",
+      "desc": "Applied machine learning techniques to uncover patterns, predict outcomes, and solve real-world business challenges. Built predictive models through data preprocessing, feature engineering, algorithm selection, and model optimization.",
       "logo": [
         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg",
         "https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png"
@@ -39,17 +37,27 @@
     },
     {
       "name": "Statistics",
-      "desc": "Statistics is the foundation of my data analysis, helping me understand distributions, relationships, and significance.",
+      "desc": "Utilized statistical methods to identify trends, validate assumptions, and support data-driven decision-making. Applied concepts such as hypothesis testing, probability distributions, correlation analysis, and statistical inference to derive meaningful conclusions.",
       "logo": "https://img.icons8.com/ios-filled/100/000000/statistics.png"
     },
     {
       "name": "EDA",
-      "desc": "Exploratory Data Analysis to uncover patterns, clean data, and prepare actionable insights.",
+      "desc": "Uncovered hidden patterns and valuable insights through comprehensive exploratory data analysis. Leveraged statistical summaries and visualizations to understand data behavior, identify anomalies, and prepare datasets for advanced analytics.",
       "logo": [
         "https://pandas.pydata.org/static/img/pandas.svg",
         "https://seaborn.pydata.org/_static/logo-wide-lightbg.svg",
         "https://img.icons8.com/color/96/000000/matplotlib.png"
       ]
+    },
+    {
+      "name": "Model Development",
+      "desc": "Developed end-to-end machine learning solutions by transforming raw data into predictive models. Applied feature engineering, model selection, and optimization techniques to create robust and scalable analytical solutions.",
+      "logo": "https://img.icons8.com/ios-filled/100/development-skill.png"
+    },
+    {
+      "name": "Model Evaluation",
+      "desc": "Evaluated machine learning models using appropriate metrics and validation techniques to ensure their performance and reliability in real-world applications.",
+      "logo": "https://img.icons8.com/ios-filled/100/combo-chart.png"
     }
   ],
   "projects": [
@@ -154,12 +162,12 @@
       "link": "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Sj7temL583QAYpHXD/bWqaecPDbYAwSDqJy_Sj7temL583QAYpHXD_69906f33147ed75a2fde8693_1774848542891_completion_certificate.pdf"
     },
     {
-      "title": "Quantitative Research and Job Stimulation",
-      "issuer": "Quantium Virtual Internship via forage",
-      "description": " A virtual internship opportunity to gain hands-on experience in financial quantitative analysis.",
-      "details": "Completed a quantitative research job simulation focused on data analysis, financial modeling, and quantitative problem-solving. Applied Python and analytical techniques to forecast natural gas prices, evaluate storage contract profitability, and perform credit risk assessment using borrower data. Gained hands-on experience in financial analytics, risk management, and data-driven decision-making through real-world quantitative research tasks.\n\nSkills: Python, Quantitative Research, Financial Modeling, Data Analysis, Risk Analytics, Forecasting, Credit Risk Assessment",
-      "image": "/static/uploads/image3.png",
-      "link": "https://www.theforage.com/completion-certificates/32A6DqtsbF7LbKdcq/NkaC7knWtjSbi6aYv_32A6DqtsbF7LbKdcq_69906f33147ed75a2fde8693_1774086452640_completion_certificate.pdf"
+      "title": "BCGX and Data Science Job Stimulation",
+      "issuer": "BCGX Virtual Internship via forage",
+      "description": " A virtual internship opportunity to gain hands-on experience in customer analytics.",
+      "details": "Built an end-to-end customer churn prediction model using Python, Pandas, and NumPy. Performed data cleaning, exploratory data analysis (EDA), and visualization to identify key churn drivers. Developed and optimized a Random Forest model, achieving a 50% recall score in predicting customer churn. Delivered actionable business insights and recommendations to support customer retention strategies.",
+      "image": "/static/uploads/image4.png",
+      "link": "https://www.theforage.com/completion-certificates/SKZxezskWgmFjRvj9/Tcz8gTtprzAS4xSoK_SKZxezskWgmFjRvj9_69906f33147ed75a2fde8693_1782049362350_completion_certificate.pdf"
     }
 
   ],

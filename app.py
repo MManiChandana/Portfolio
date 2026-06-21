@@ -42,8 +42,6 @@ DEFAULT_DATA = {
         "email": "mchandana10m2003@gmail.com",
         "hero_image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1800&q=80",
         "profile_image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
-        "profile_video": "",
-        "profile_audio": "",
     },
     "skills": [
         {
