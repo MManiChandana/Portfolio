@@ -1,82 +1,15 @@
 (() => {
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const intro = document.querySelector('#siteIntro');
-  const frames = [...document.querySelectorAll('.intro-frame')];
-  const identity = document.querySelector('#introIdentity');
-  const count = document.querySelector('#introCount');
-  const closeIntro = () => intro?.classList.add('done');
-
-  if (intro && !reduced) {
-    let index = 0;
-    const advance = () => {
-      if (index < frames.length - 1) {
-        frames[index].classList.remove('active');
-        index += 1;
-        frames[index].classList.add('active');
-        if (count) count.textContent = `Signal ${String(index + 1).padStart(2, '0')} / ${frames.length}`;
-        window.setTimeout(advance, 1550);
-      } else {
-        window.setTimeout(() => identity?.classList.add('show'), 500);
-      }
-    };
-    window.setTimeout(advance, 1350);
-  } else { closeIntro(); }
-  document.querySelector('#introEnter')?.addEventListener('click', closeIntro);
-  document.querySelector('#introSkip')?.addEventListener('click', closeIntro);
-
-  const cursor = document.querySelector('.cursor-dot');
-  if (cursor && !reduced && window.matchMedia('(pointer:fine)').matches) {
-    window.addEventListener('pointermove', e => { cursor.style.left = `${e.clientX}px`; cursor.style.top = `${e.clientY}px`; });
-    document.querySelectorAll('a,button,.project-card').forEach(el => {
-      el.addEventListener('pointerenter', () => cursor.classList.add('active'));
-      el.addEventListener('pointerleave', () => cursor.classList.remove('active'));
-    });
-  }
-
-  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-    if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
-  }), { threshold: .12 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  const detail = document.querySelector('#skillDetail');
-  document.querySelectorAll('.skill-chip').forEach(chip => chip.addEventListener('click', () => {
-    document.querySelectorAll('.skill-chip').forEach(item => item.classList.remove('selected'));
-    chip.classList.add('selected');
-    if (detail) detail.textContent = `${chip.dataset.title}: ${chip.dataset.description}`;
-  }));
-
-  const exploreToggle = document.querySelector('.explore-toggle');
-  exploreToggle?.addEventListener('click', event => {
-    event.preventDefault();
-    const active = document.body.classList.toggle('lab-mode');
-    exploreToggle.setAttribute('aria-pressed', String(active));
-    exploreToggle.innerHTML = active ? 'Recruiter mode <span>→</span>' : 'Explore 3D lab <span>◎</span>';
-  });
-
-  const dialog = document.querySelector('#projectDialog');
-  const openProject = card => {
-    if (!dialog) return;
-    const set = (selector, value) => { const el = document.querySelector(selector); if (el) el.textContent = value || ''; };
-    set('#dialogTitle', card.dataset.title); set('#dialogTech', card.dataset.tech); set('#dialogTechnology', card.dataset.tech); set('#dialogDescription', card.dataset.description);
-    const image = document.querySelector('#dialogImage'); image.src = card.dataset.image || ''; image.alt = `${card.dataset.title} preview`;
-    const links = document.querySelector('#dialogLinks'); links.replaceChildren();
-    [['Live demo', card.dataset.live], ['GitHub', card.dataset.repo]].forEach(([label, url]) => {
-      if (url && url !== '#') { const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.rel = 'noreferrer'; a.textContent = `${label} ↗`; links.append(a); }
-    });
-    dialog.showModal();
-  };
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('click', () => openProject(card));
-    card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openProject(card); } });
-  });
-  document.querySelector('.dialog-close')?.addEventListener('click', () => dialog?.close());
-  dialog?.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
-
-  const canvas = document.querySelector('#neuralCanvas');
-  if (!canvas || reduced) return;
-  const ctx = canvas.getContext('2d'); let dots = []; let width = 0; let height = 0; const fine = window.matchMedia('(pointer:fine)').matches;
-  const resize = () => { width = canvas.width = window.innerWidth * devicePixelRatio; height = canvas.height = window.innerHeight * devicePixelRatio; canvas.style.width = `${window.innerWidth}px`; canvas.style.height = `${window.innerHeight}px`; ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0); const total = window.innerWidth < 700 ? 20 : 42; dots = Array.from({ length: total }, () => ({x: Math.random()*window.innerWidth, y: Math.random()*window.innerHeight, vx:(Math.random()-.5)*.18, vy:(Math.random()-.5)*.18})); };
-  resize(); window.addEventListener('resize', resize); let mouse = {x:-999,y:-999}; if (fine) window.addEventListener('pointermove', e => mouse={x:e.clientX,y:e.clientY});
-  const draw = () => { ctx.clearRect(0,0,window.innerWidth,window.innerHeight); dots.forEach(dot => { dot.x += dot.vx; dot.y += dot.vy; if(dot.x<0||dot.x>window.innerWidth) dot.vx*=-1; if(dot.y<0||dot.y>window.innerHeight) dot.vy*=-1; }); for(let a=0;a<dots.length;a++){ const d=dots[a]; ctx.beginPath(); ctx.arc(d.x,d.y,1.35,0,Math.PI*2); ctx.fillStyle='rgba(132,227,208,.58)'; ctx.fill(); for(let b=a+1;b<dots.length;b++){const q=dots[b],dx=d.x-q.x,dy=d.y-q.y,dist=Math.hypot(dx,dy);if(dist<125){ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(139,126,255,${.16*(1-dist/125)})`;ctx.stroke();}} const md=Math.hypot(d.x-mouse.x,d.y-mouse.y);if(md<150){ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(mouse.x,mouse.y);ctx.strokeStyle=`rgba(132,227,208,${.22*(1-md/150)})`;ctx.stroke();}} requestAnimationFrame(draw); };
-  draw();
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches, intro=document.querySelector('#siteIntro'),frames=[...document.querySelectorAll('.intro-frame')],identity=document.querySelector('#introIdentity'),count=document.querySelector('#introCount'),closeIntro=()=>intro?.classList.add('done');
+  if(intro&&!reduced){let index=0;const advance=()=>{if(index<frames.length-1){frames[index++].classList.remove('active');frames[index].classList.add('active');if(count)count.textContent=`Signal ${String(index+1).padStart(2,'0')} / ${frames.length}`;setTimeout(advance,1300)}else setTimeout(()=>identity?.classList.add('show'),350)};setTimeout(advance,950)}else closeIntro();
+  document.querySelector('#introEnter')?.addEventListener('click',closeIntro);document.querySelector('#introSkip')?.addEventListener('click',closeIntro);
+  document.querySelectorAll('.skill-node').forEach(node=>node.addEventListener('click',()=>{document.querySelectorAll('.skill-node').forEach(n=>n.classList.remove('selected'));node.classList.add('selected');document.querySelector('#skillDetail').textContent=`${node.dataset.title}: ${node.dataset.description}`}));
+  const dialog=document.querySelector('#projectDialog'),set=(id,text)=>{const el=document.querySelector(id);if(el)el.textContent=text||'Details are being documented as the system evolves.'};
+  const openProject=card=>{set('#dialogTitle',card.dataset.title);set('#dialogTech',card.dataset.tech);set('#dialogDescription',card.dataset.description);set('#dialogTechnology',card.dataset.tech);set('#dialogProblem',card.dataset.problem||card.dataset.description);set('#dialogApproach',card.dataset.approach||'See the project overview for the implemented workflow.');let results=[];try{results=JSON.parse(card.dataset.results)}catch{}set('#dialogResults',results.length?results.join(' · '):card.dataset.description);set('#dialogNext',card.dataset.next||'Future iterations will be recorded with the project.');const arch=document.querySelector('#dialogArchitecture');arch.replaceChildren();card.dataset.tech.split(/\s+-\s+/).filter(Boolean).forEach((step,i)=>{if(i)arch.append(Object.assign(document.createElement('i'),{}));const item=document.createElement('span');item.textContent=step;arch.append(item)});const links=document.querySelector('#dialogLinks');links.replaceChildren();[['Live demo',card.dataset.live],['GitHub',card.dataset.repo]].forEach(([label,url])=>{if(url&&url!=='#'){const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noreferrer';a.textContent=`${label} ↗`;links.append(a)}});dialog.showModal()};
+  document.querySelectorAll('.project-node').forEach(card=>{card.addEventListener('click',()=>openProject(card));card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openProject(card)}})});document.querySelector('.dialog-close')?.addEventListener('click',()=>dialog.close());
+  if(!window.THREE||reduced)return;
+  const canvas=document.querySelector('#worldCanvas'),renderer=new THREE.WebGLRenderer({canvas,antialias:false}),scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(56,innerWidth/innerHeight,.1,180);renderer.setPixelRatio(Math.min(devicePixelRatio,innerWidth<700?1.25:1.75));renderer.setSize(innerWidth,innerHeight);scene.fog=new THREE.FogExp2(0x050814,.036);scene.add(new THREE.AmbientLight(0x8296dd,1.2));const light=new THREE.PointLight(0x84e3d0,15,42),violet=new THREE.PointLight(0x8574ff,12,36);scene.add(light,violet);
+  const total=innerWidth<700?450:1200,positions=new Float32Array(total*3),colors=new Float32Array(total*3);for(let i=0;i<total;i++){const z=-i/total*105+10,radius=2+Math.random()*12;positions.set([Math.cos(i*.63)*radius+(Math.random()-.5)*5,Math.sin(i*.41)*radius+(Math.random()-.5)*6,z],i*3);colors.set([.35+Math.random()*.2,.65+Math.random()*.3,1],i*3)}const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.BufferAttribute(positions,3));geometry.setAttribute('color',new THREE.BufferAttribute(colors,3));scene.add(new THREE.Points(geometry,new THREE.PointsMaterial({size:.09,vertexColors:true,transparent:true,opacity:.86})));
+  const wire=new THREE.Group();for(let i=0;i<32;i++){const orb=new THREE.Mesh(new THREE.IcosahedronGeometry(.12+(i%4)*.035,1),new THREE.MeshBasicMaterial({color:i%2?0x84e3d0:0x8876ff,transparent:true,opacity:.7}));orb.position.set(Math.sin(i*5)*5,Math.cos(i*3)*3,-i*3.3);wire.add(orb);if(i){const prev=wire.children[i-1].position,lineGeo=new THREE.BufferGeometry().setFromPoints([prev,orb.position]);wire.add(new THREE.Line(lineGeo,new THREE.LineBasicMaterial({color:0x5364bb,transparent:true,opacity:.22})))}}scene.add(wire);
+  const stops=[{p:[0,0,12],l:[0,0,-12]},{p:[3,1,0],l:[0,0,-18]},{p:[-3,2,-16],l:[0,0,-33]},{p:[2,-1,-34],l:[0,0,-52]},{p:[-2,1,-52],l:[0,0,-70]},{p:[2,0,-70],l:[0,0,-88]},{p:[0,0,-88],l:[0,0,-105]}];let target=0,current=0,mouse={x:0,y:0};addEventListener('pointermove',e=>mouse={x:e.clientX/innerWidth-.5,y:e.clientY/innerHeight-.5});const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)target=Number(entry.target.dataset.world)}),{threshold:.5});document.querySelectorAll('.world-stop').forEach(s=>observer.observe(s));
+  const render=()=>{current+=(target-current)*.035;const low=Math.floor(current),high=Math.min(stops.length-1,low+1),blend=current-low,a=stops[low],b=stops[high];camera.position.set(a.p[0]+(b.p[0]-a.p[0])*blend+mouse.x*.7,a.p[1]+(b.p[1]-a.p[1])*blend-mouse.y*.5,a.p[2]+(b.p[2]-a.p[2])*blend);camera.lookAt(new THREE.Vector3(a.l[0]+(b.l[0]-a.l[0])*blend,a.l[1]+(b.l[1]-a.l[1])*blend,a.l[2]+(b.l[2]-a.l[2])*blend));light.position.copy(camera.position).add(new THREE.Vector3(2,3,-5));violet.position.set(-5+Math.sin(performance.now()*.0004)*3,2,camera.position.z-10);wire.rotation.z+=.0007;renderer.render(scene,camera);requestAnimationFrame(render)};render();addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(devicePixelRatio,innerWidth<700?1.25:1.75));renderer.setSize(innerWidth,innerHeight)})
 })();

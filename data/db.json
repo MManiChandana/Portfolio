@@ -180,10 +180,10 @@
   "messages": [],
   "settings": {},
   "intro_images": [
-    "/static/uploads/intro/Screenshot1.png",
-    "/static/uploads/intro/Screenshot2.png",
-    "/static/uploads/intro/Screenshot3.png",
-    "/static/uploads/intro/Screenshot4.png",
-    "/static/uploads/intro/Screenshot5.png"
+    "/static/uploads/intro/Intro1.png",
+    "/static/uploads/intro/Intro2.png",
+    "/static/uploads/intro/Intro3.png",
+    "/static/uploads/intro/Intro4.png",
+    "/static/uploads/intro/Intro5.png"
   ]
 }
