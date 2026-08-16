@@ -1,8 +1,8 @@
 {
   "profile": {
     "name": "M Mani Chandana",
-    "role": "Data Analyst | Data Scientist",
-    "about": "Data Analyst and Data Scientist passionate about transforming raw data into meaningful business insights using Python, SQL, Power BI, Statistics, and Machine Learning.",
+    "role": "AI/ML Engineer | Data Scientist",
+    "about": "AI/ML Engineer with a strong foundation in data analysis, statistics, Python and SQL — building machine learning workflows that turn raw data into predictive models and real decisions.",
     "hero_lines": "I build clean dashboards, practical analytics workflows, and machine learning experiments that turn raw data into decisions.",
     "resume": "https://drive.google.com/file/d/1U7PmtR-nxO63hellguOBK-RHGZkPYkOG/view?usp=drive_link",
     "linkedin": "https://www.linkedin.com/in/mchandana10032003/",
@@ -149,7 +149,8 @@
       "description": "A virtual internship opportunity to gain hands-on experience in market quantitative analysis.",
       "details": "Completed a quantitative finance job simulation focused on financial risk management, securities structuring, quantitative analysis, and market research. Applied data-driven techniques to analyze financial scenarios, assess risk factors, and support decision-making in capital markets. Developed practical exposure to the responsibilities of a Markets Quant Analyst within a global banking environment.\n\nSkills: Quantitative Analysis, Financial Risk Management, Market Research, Financial Modeling, Data Analysis",
       "image": "/static/uploads/image.png",
-      "link": "https://www.theforage.com/completion-certificates/8eNRcRqBZM9HLvwGw/fAuNBibfF4dzrgtDY_8eNRcRqBZM9HLvwGw_69906f33147ed75a2fde8693_1774022298760_completion_certificate.pdf"
+      "link": "https://www.theforage.com/completion-certificates/8eNRcRqBZM9HLvwGw/fAuNBibfF4dzrgtDY_8eNRcRqBZM9HLvwGw_69906f33147ed75a2fde8693_1774022298760_completion_certificate.pdf",
+      "skills": "Quantitative Analysis - Financial Risk Management - Market Research - Financial Modeling - Data Analysis"
     },
     {
       "title": "Quantitative Research and Job Stimulation",
@@ -157,7 +158,8 @@
       "description": "A virtual internship opportunity to gain hands-on experience in market quantitative analysis.",
       "details": "Completed a quantitative finance job simulation focused on financial risk management, securities structuring, quantitative analysis, and market research. Applied data-driven techniques to analyze financial scenarios, assess risk factors, and support decision-making in capital markets. Developed practical exposure to the responsibilities of a Markets Quant Analyst within a global banking environment.\n\nSkills: Quantitative Analysis, Financial Risk Management, Market Research, Financial Modeling, Data Analysis",
       "image": "/static/uploads/image2.png",
-      "link": "https://www.theforage.com/completion-certificates/Sj7temL583QAYpHXD/bWqaecPDbYAwSDqJy_Sj7temL583QAYpHXD_69906f33147ed75a2fde8693_1774848542891_completion_certificate.pdf"
+      "link": "https://www.theforage.com/completion-certificates/Sj7temL583QAYpHXD/bWqaecPDbYAwSDqJy_Sj7temL583QAYpHXD_69906f33147ed75a2fde8693_1774848542891_completion_certificate.pdf",
+      "skills": "Quantitative Analysis - Financial Risk Management - Market Research - Financial Modeling - Data Analysis"
     },
     {
       "title": "Quantitative Research and Job Stimulation",
@@ -165,7 +167,8 @@
       "description": " A virtual internship opportunity to gain hands-on experience in financial quantitative analysis.",
       "details": "Completed a quantitative research job simulation focused on data analysis, financial modeling, and quantitative problem-solving. Applied Python and analytical techniques to forecast natural gas prices, evaluate storage contract profitability, and perform credit risk assessment using borrower data. Gained hands-on experience in financial analytics, risk management, and data-driven decision-making through real-world quantitative research tasks.\n\nSkills: Python, Quantitative Research, Financial Modeling, Data Analysis, Risk Analytics, Forecasting, Credit Risk Assessment",
       "image": "/static/uploads/image3.png",
-      "link": "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Sj7temL583QAYpHXD/bWqaecPDbYAwSDqJy_Sj7temL583QAYpHXD_69906f33147ed75a2fde8693_1774848542891_completion_certificate.pdf"
+      "link": "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Sj7temL583QAYpHXD/bWqaecPDbYAwSDqJy_Sj7temL583QAYpHXD_69906f33147ed75a2fde8693_1774848542891_completion_certificate.pdf",
+      "skills": "Python - Quantitative Research - Financial Modeling - Data Analysis - Risk Analytics - Forecasting - Credit Risk Assessment"
     },
     {
       "title": "BCGX and Data Science Job Stimulation",
@@ -175,7 +178,6 @@
       "image": "/static/uploads/image4.png",
       "link": "https://www.theforage.com/completion-certificates/SKZxezskWgmFjRvj9/Tcz8gTtprzAS4xSoK_SKZxezskWgmFjRvj9_69906f33147ed75a2fde8693_1782049362350_completion_certificate.pdf"
     }
-
   ],
   "messages": [],
   "settings": {},

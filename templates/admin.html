@@ -127,7 +127,7 @@
 
         <form class="admin-card" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="action" value="add_virtual_project">
-            <h2>Add Virtual Project</h2>
+            <h2>Add Applied Learning</h2>
             <label>Title<input name="title" required></label>
             <label>Company<input name="company" placeholder="Deloitte, BCG, JPMorgan..." required></label>
             <label>Short description<textarea name="description" required></textarea></label>
@@ -136,7 +136,7 @@
             <label>Image link<input name="image" placeholder="https://..."></label>
             <label>Upload image<input type="file" name="image_file" accept="image/*"></label>
             <label>Experience/certificate link<input name="link"></label>
-            <button class="button primary" type="submit">Add Virtual Project</button>
+            <button class="button primary" type="submit">Add Applied Learning</button>
         </form>
     </section>
 
@@ -208,7 +208,7 @@
     </section>
 
     <section class="admin-section">
-        <h2>Existing Virtual Projects</h2>
+        <h2>Existing Applied Learning</h2>
         <div class="editor-grid">
             {% for item in data.virtual_projects %}
             <form class="admin-card compact" method="POST" enctype="multipart/form-data">
