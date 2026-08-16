@@ -1,246 +1,82 @@
-const modal = document.querySelector("#infoModal");
+(() => {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const intro = document.querySelector('#siteIntro');
+  const frames = [...document.querySelectorAll('.intro-frame')];
+  const identity = document.querySelector('#introIdentity');
+  const count = document.querySelector('#introCount');
+  const closeIntro = () => intro?.classList.add('done');
 
-function openModal({ title, desc, tech, image, live, repo, liveLabel, imageMode, logos }) {
-    if (!modal) {
-        return;
-    }
-
-    modal.classList.add("is-open");
-    modal.classList.toggle("is-image-view", imageMode === "full");
-    modal.setAttribute("aria-hidden", "false");
-    modal.querySelector("h2").textContent = title || "";
-    const logosContainer = modal.querySelector('.modal-logos');
-    if (logosContainer) {
-        logosContainer.innerHTML = '';
-        try {
-            if (Array.isArray(logos)) {
-                logos.forEach((src) => {
-                    const img = document.createElement('img');
-                    img.src = src;
-                    img.alt = title + ' logo';
-                    logosContainer.appendChild(img);
-                });
-            }
-        } catch (e) {
-            logosContainer.innerHTML = '';
-        }
-    }
-    modal.querySelector(".modal-desc").textContent = desc || "";
-    modal.querySelector(".modal-tech").textContent = tech || "";
-
-    const modalImage = modal.querySelector(".modal-image");
-    modalImage.src = image || "";
-    modalImage.alt = title || "";
-
-    const links = modal.querySelector(".modal-links");
-    links.innerHTML = "";
-
-    if (live && live !== "#") {
-        const liveLink = document.createElement("a");
-        liveLink.href = live;
-        liveLink.target = "_blank";
-        liveLink.rel = "noreferrer";
-        liveLink.textContent = liveLabel || "Open Live Project";
-        links.appendChild(liveLink);
-    }
-
-    if (repo && repo !== "#") {
-        const repoLink = document.createElement("a");
-        repoLink.href = repo;
-        repoLink.target = "_blank";
-        repoLink.rel = "noreferrer";
-        repoLink.textContent = "Open Repository";
-        links.appendChild(repoLink);
-    }
-}
-
-function closeModal() {
-    if (!modal) {
-        return;
-    }
-
-    modal.classList.remove("is-open");
-    modal.classList.remove("is-image-view");
-    modal.setAttribute("aria-hidden", "true");
-}
-
-document.querySelectorAll(".skill-card").forEach((card) => {
-    card.addEventListener("click", () => {
-        let logos = [];
-        try {
-            if (card.dataset.logos) logos = JSON.parse(card.dataset.logos);
-        } catch (e) { logos = []; }
-        openModal({
-            title: card.dataset.title,
-            desc: card.dataset.desc,
-            tech: "Skill",
-            image: "",
-            live: "",
-            repo: "",
-            logos: logos,
-        });
-    });
-});
-
-document.querySelectorAll(".project-detail").forEach((button) => {
-    button.addEventListener("click", () => {
-        openModal({
-            title: button.dataset.title,
-            desc: button.dataset.desc,
-            tech: button.dataset.tech,
-            image: button.dataset.image,
-            live: button.dataset.live,
-            repo: button.dataset.repo,
-        });
-    });
-});
-
-document.querySelectorAll(".cert-detail").forEach((button) => {
-    button.addEventListener("click", () => {
-        openModal({
-            title: button.dataset.title,
-            desc: button.dataset.desc,
-            tech: button.dataset.tech,
-            image: button.dataset.image,
-            live: button.dataset.link,
-            repo: "",
-            liveLabel: "Open Certificate",
-            imageMode: "full",
-        });
-    });
-});
-
-document.querySelectorAll(".virtual-project-detail").forEach((button) => {
-    button.addEventListener("click", () => {
-        openModal({
-            title: button.dataset.title,
-            desc: button.dataset.desc,
-            tech: button.dataset.tech,
-            image: button.dataset.image,
-            live: button.dataset.link,
-            repo: "",
-            liveLabel: "Open Experience",
-            imageMode: "full",
-        });
-    });
-});
-
-if (modal) {
-    modal.querySelector(".modal-close").addEventListener("click", closeModal);
-    modal.addEventListener("click", (event) => {
-        if (event.target === modal) {
-            closeModal();
-        }
-    });
-}
-
-document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-        closeModal();
-    }
-});
-
-const introOverlay = document.getElementById("siteIntro");
-const introEnter = document.getElementById("introEnter");
-const introImages = document.querySelectorAll(".intro-image-wrapper");
-
-function animateIntroImages() {
-    introImages.forEach((wrapper, index) => {
-        window.setTimeout(() => {
-            wrapper.classList.add("is-visible");
-        }, index * 700);
-    });
-
-    if (introEnter) {
-        window.setTimeout(() => {
-            introEnter.classList.add("visible");
-        }, introImages.length * 700);
-    }
-}
-
-function hideIntroOverlay() {
-    if (!introOverlay) {
-        return;
-    }
-    introOverlay.classList.add("is-hidden");
-    window.setTimeout(() => {
-        introOverlay.remove();
-    }, 600);
-}
-
-if (introEnter) {
-    introEnter.addEventListener("click", hideIntroOverlay);
-}
-
-window.addEventListener("load", () => {
-    if (introOverlay) {
-        animateIntroImages();
-    }
-});
-
-function animateDashboardCounters() {
-    document.querySelectorAll(".dashboard-value").forEach((element) => {
-        const endValue = Number(element.dataset.value) || 0;
-        const duration = 700;
-        const stepTime = Math.max(Math.floor(duration / Math.max(endValue, 1)), 20);
-        let current = 0;
-        const timer = setInterval(() => {
-            current += 1;
-            element.textContent = current;
-            if (current >= endValue) {
-                clearInterval(timer);
-            }
-        }, stepTime);
-    });
-}
-
-animateDashboardCounters();
-
-/* Hero audio autoplay and scroll-to-play handling */
-const heroAudio = document.getElementById("heroAudio");
-const unmuteBtn = document.getElementById("unmuteBtn");
-const audioPlayedKey = "portfolioHeroAudioPlayed";
-if (heroAudio) {
-    const tryPlayAudio = () => {
-        if (!heroAudio) return Promise.reject();
-        return heroAudio.play().then(() => {
-            try { localStorage.setItem(audioPlayedKey, "true"); } catch (e) {}
-            if (unmuteBtn) unmuteBtn.classList.remove("visible");
-        });
+  if (intro && !reduced) {
+    let index = 0;
+    const advance = () => {
+      if (index < frames.length - 1) {
+        frames[index].classList.remove('active');
+        index += 1;
+        frames[index].classList.add('active');
+        if (count) count.textContent = `Signal ${String(index + 1).padStart(2, '0')} / ${frames.length}`;
+        window.setTimeout(advance, 1550);
+      } else {
+        window.setTimeout(() => identity?.classList.add('show'), 500);
+      }
     };
+    window.setTimeout(advance, 1350);
+  } else { closeIntro(); }
+  document.querySelector('#introEnter')?.addEventListener('click', closeIntro);
+  document.querySelector('#introSkip')?.addEventListener('click', closeIntro);
 
-    const audioObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                const already = localStorage.getItem(audioPlayedKey) === "true";
-                if (!already) {
-                    tryPlayAudio().catch(() => {
-                        if (unmuteBtn) unmuteBtn.classList.add("visible");
-                    });
-                }
-            }
-        });
-    }, { threshold: 0.5 });
+  const cursor = document.querySelector('.cursor-dot');
+  if (cursor && !reduced && window.matchMedia('(pointer:fine)').matches) {
+    window.addEventListener('pointermove', e => { cursor.style.left = `${e.clientX}px`; cursor.style.top = `${e.clientY}px`; });
+    document.querySelectorAll('a,button,.project-card').forEach(el => {
+      el.addEventListener('pointerenter', () => cursor.classList.add('active'));
+      el.addEventListener('pointerleave', () => cursor.classList.remove('active'));
+    });
+  }
 
-    const heroSection = document.querySelector('.hero');
-    if (heroSection) audioObserver.observe(heroSection);
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+  }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    if (unmuteBtn) {
-        unmuteBtn.addEventListener('click', () => {
-            tryPlayAudio().catch(() => {});
-        });
-    }
-}
+  const detail = document.querySelector('#skillDetail');
+  document.querySelectorAll('.skill-chip').forEach(chip => chip.addEventListener('click', () => {
+    document.querySelectorAll('.skill-chip').forEach(item => item.classList.remove('selected'));
+    chip.classList.add('selected');
+    if (detail) detail.textContent = `${chip.dataset.title}: ${chip.dataset.description}`;
+  }));
 
-const observer = new IntersectionObserver(
-    (entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
-            }
-        });
-    },
-    { threshold: 0.16 }
-);
+  const exploreToggle = document.querySelector('.explore-toggle');
+  exploreToggle?.addEventListener('click', event => {
+    event.preventDefault();
+    const active = document.body.classList.toggle('lab-mode');
+    exploreToggle.setAttribute('aria-pressed', String(active));
+    exploreToggle.innerHTML = active ? 'Recruiter mode <span>→</span>' : 'Explore 3D lab <span>◎</span>';
+  });
 
-document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+  const dialog = document.querySelector('#projectDialog');
+  const openProject = card => {
+    if (!dialog) return;
+    const set = (selector, value) => { const el = document.querySelector(selector); if (el) el.textContent = value || ''; };
+    set('#dialogTitle', card.dataset.title); set('#dialogTech', card.dataset.tech); set('#dialogTechnology', card.dataset.tech); set('#dialogDescription', card.dataset.description);
+    const image = document.querySelector('#dialogImage'); image.src = card.dataset.image || ''; image.alt = `${card.dataset.title} preview`;
+    const links = document.querySelector('#dialogLinks'); links.replaceChildren();
+    [['Live demo', card.dataset.live], ['GitHub', card.dataset.repo]].forEach(([label, url]) => {
+      if (url && url !== '#') { const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.rel = 'noreferrer'; a.textContent = `${label} ↗`; links.append(a); }
+    });
+    dialog.showModal();
+  };
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', () => openProject(card));
+    card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openProject(card); } });
+  });
+  document.querySelector('.dialog-close')?.addEventListener('click', () => dialog?.close());
+  dialog?.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+
+  const canvas = document.querySelector('#neuralCanvas');
+  if (!canvas || reduced) return;
+  const ctx = canvas.getContext('2d'); let dots = []; let width = 0; let height = 0; const fine = window.matchMedia('(pointer:fine)').matches;
+  const resize = () => { width = canvas.width = window.innerWidth * devicePixelRatio; height = canvas.height = window.innerHeight * devicePixelRatio; canvas.style.width = `${window.innerWidth}px`; canvas.style.height = `${window.innerHeight}px`; ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0); const total = window.innerWidth < 700 ? 20 : 42; dots = Array.from({ length: total }, () => ({x: Math.random()*window.innerWidth, y: Math.random()*window.innerHeight, vx:(Math.random()-.5)*.18, vy:(Math.random()-.5)*.18})); };
+  resize(); window.addEventListener('resize', resize); let mouse = {x:-999,y:-999}; if (fine) window.addEventListener('pointermove', e => mouse={x:e.clientX,y:e.clientY});
+  const draw = () => { ctx.clearRect(0,0,window.innerWidth,window.innerHeight); dots.forEach(dot => { dot.x += dot.vx; dot.y += dot.vy; if(dot.x<0||dot.x>window.innerWidth) dot.vx*=-1; if(dot.y<0||dot.y>window.innerHeight) dot.vy*=-1; }); for(let a=0;a<dots.length;a++){ const d=dots[a]; ctx.beginPath(); ctx.arc(d.x,d.y,1.35,0,Math.PI*2); ctx.fillStyle='rgba(132,227,208,.58)'; ctx.fill(); for(let b=a+1;b<dots.length;b++){const q=dots[b],dx=d.x-q.x,dy=d.y-q.y,dist=Math.hypot(dx,dy);if(dist<125){ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(139,126,255,${.16*(1-dist/125)})`;ctx.stroke();}} const md=Math.hypot(d.x-mouse.x,d.y-mouse.y);if(md<150){ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(mouse.x,mouse.y);ctx.strokeStyle=`rgba(132,227,208,${.22*(1-md/150)})`;ctx.stroke();}} requestAnimationFrame(draw); };
+  draw();
+})();

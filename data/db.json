@@ -11,6 +11,12 @@
     "hero_image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1800&q=80",
     "profile_image": "/static/uploads/54591a32db994f1598d9098388f575b8_ChatGPT_Image_Feb_16_2026_06_47_04_PM.png"
   },
+  "lab": {
+    "label": "MANI // INTELLIGENCE LAB",
+    "availability": "",
+    "current_focus": [],
+    "last_updated": ""
+  },
   "skills": [
     {
       "name": "Python",

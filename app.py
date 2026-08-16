@@ -43,6 +43,12 @@ DEFAULT_DATA = {
         "hero_image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1800&q=80",
         "profile_image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
     },
+    "lab": {
+        "label": "MANI // INTELLIGENCE LAB",
+        "availability": "",
+        "current_focus": [],
+        "last_updated": "",
+    },
     "skills": [
         {
             "name": "Python",
@@ -126,9 +132,16 @@ def normalize_data(data):
             skill["logo"] = []
 
     for project in data.get("projects", []):
+        project.setdefault("id", project.get("title", "project").lower().replace(" ", "-"))
         project.setdefault("details", project.get("description", ""))
         project.setdefault("live_link", "#")
         project.setdefault("repo_link", "#")
+        # Optional case-study fields are intentionally empty until verified data is added.
+        project.setdefault("problem", "")
+        project.setdefault("approach", "")
+        project.setdefault("architecture", [])
+        project.setdefault("results", [])
+        project.setdefault("next_steps", "")
 
     data.setdefault("certifications", [])
     data.setdefault("virtual_projects", [])
@@ -141,6 +154,11 @@ def normalize_data(data):
         virtual_project.setdefault("link", "")
     data.setdefault("messages", [])
     data.setdefault("settings", {})
+    data.setdefault("lab", {})
+    data["lab"].setdefault("label", "MANI // INTELLIGENCE LAB")
+    data["lab"].setdefault("availability", "")
+    data["lab"].setdefault("current_focus", [])
+    data["lab"].setdefault("last_updated", "")
     return data
 
 

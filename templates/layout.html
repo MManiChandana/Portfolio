@@ -1,13 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ data.profile.name if data and data.profile else "Portfolio" }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#070b16">
+    <meta name="description" content="M Mani Chandana — AI/ML Engineer building data and intelligent systems.">
+    <meta property="og:title" content="M Mani Chandana | AI/ML Engineer">
+    <meta property="og:description" content="Data, machine learning, and intelligent systems portfolio.">
+    <meta property="og:type" content="website">
+    {% if data and data.profile and data.profile.profile_image %}<meta property="og:image" content="{{ data.profile.profile_image }}">{% endif %}
+    <title>{% block title %}{{ data.profile.name if data and data.profile else 'Portfolio' }} | AI/ML Engineer{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lab.css') }}">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     {% block content %}{% endblock %}
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 </body>
 </html>
